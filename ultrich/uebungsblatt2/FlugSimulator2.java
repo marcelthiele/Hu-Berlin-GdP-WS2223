@@ -1,3 +1,4 @@
+package ultrich.uebungsblatt2;
 
 
 public class FlugSimulator2 {
