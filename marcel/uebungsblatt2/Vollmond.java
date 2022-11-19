@@ -27,21 +27,19 @@ public class Vollmond {
 	 * @param numOfMoonsToFind         Wie viele gesuchte Monate sollen gefunden
 	 *                                 werden
 	 */
-	private static String[] findMoons(int numOfDaysPerYear, int moonPeriod, int numOfMoonsPerMonthToFind,
+	private static void findMoons(int numOfDaysPerYear, int moonPeriod, int numOfMoonsPerMonthToFind,
 			int currentYear, int startingMoonDayDate, int[] daysOfMonth, String[] monthNames, int numOfMoonsToFind) {
 		// Die Tage in welchen gilt: die Tage des monats sind < als die Mondperiod.
 		// Hierdurch haben wir im konkreten Beispiel jeweils
 		// die 1. des Monats in jedem Monat, in denen es 30 Tage gibt
 		// und den 1. und 2. in jedem Monat, in denen es 31 Tage gibt
-		int[] interestingDays = getInterestingDays(daysOfMonth, numOfDaysPerYear, moonPeriod, numOfMoonsPerMonthToFind);
+		int[] firstDaysOfMonthsArray = getFirstDaysOfMonthsArray(daysOfMonth, numOfDaysPerYear, moonPeriod,
+				numOfMoonsPerMonthToFind);
 
 		int dayDateOfFirstOfMarch = daysOfMonth[0] + daysOfMonth[1];
 
 		int numOfFoundMoons = 0;
 		int currentDaysCounter = startingMoonDayDate;
-		int daysSinceStart = 0;
-
-		String[] retStringArray = new String[0];
 
 		while (numOfFoundMoons < numOfMoonsToFind) {
 			boolean isLeapYear = getLeapYear(currentYear);
@@ -51,44 +49,36 @@ public class Vollmond {
 			for (; currentDaysCounter <= numOfDaysInCurrentYear
 					&& numOfFoundMoons < numOfMoonsToFind; currentDaysCounter += 29) {
 				if (isLeapYear && currentDaysCounter >= dayDateOfFirstOfMarch && !corrected) {
-					// Wenn nach 29.2. dann müssen wir einen Tag abziehen um den Tag in unseren
-					// "interstingDays" zu finden
+					// Wenn nach 29.2. und derzeit in einem Schaltjahr.
+					// Dann müssen wir einen Tag abziehen um den Tag (potenziell) in unserem
+					// "firstDaysOfMonthsArray" zu finden
 					currentDaysCounter -= 1;
 					corrected = true;
 				}
 
-				if (isInArray(currentDaysCounter, interestingDays)) {
+				if (isInArray(currentDaysCounter, firstDaysOfMonthsArray)) {
 					// Ist ein Doppelvollmond-Monat
-					// retStringArray = addToStringArray(convertDaysToMonth(currentDaysCounter,
-					// currentYear, monthNames), retStringArray);
 					System.out.println(convertDaysToMonth(currentDaysCounter, currentYear, monthNames));
 					numOfFoundMoons++;
 				}
 
 			}
-			// Berichtigung vom Abzug des Tages von if(isLeapYear ...) von oben
+			// Berichtigung vom Abzug des Tages wenn es ein LeapYear ist und die Schleife nach dem ersten März ist
 			if (isLeapYear && corrected)
 				currentDaysCounter++;
 
 			// Hier werden die "verbleibenden" Tage der Mondperiode in das kommende Jahr
 			// übertragen
-			daysSinceStart += numOfDaysInCurrentYear;
 			currentDaysCounter = currentDaysCounter - numOfDaysInCurrentYear;
 			currentYear++;
 		}
-
-		// if(retStringArray.length == 0)
-		// retStringArray = addToStringArray("Keine Monate gefunden in denen es " + "
-		// Vollmonde mit einer Vollmond-Periode von " + " Tagen gefunden",
-		// retStringArray);
-		return retStringArray;
 
 	}
 
 	/***
 	 * 
 	 * @param currentYear welches das Aktuelle Jahr ist
-	 * @return ob das aktuelle Jahr ein Schaltjahr ist
+	 * @return Boolean - ob das aktuelle Jahr ein Schaltjahr ist oder nicht
 	 */
 	private static boolean getLeapYear(int currentYear) {
 		return currentYear % 4 == 0 && (!(currentYear % 100 == 0) || currentYear % 400 == 0);
@@ -102,7 +92,8 @@ public class Vollmond {
 	 * @param numOfMoonsPerMonth Wie viele Monde pro Monat suchen wir
 	 * @return
 	 */
-	private static int[] getInterestingDays(int[] months, int numOfDaysInYear, int moonPeriod, int numOfMoonsPerMonth) {
+	private static int[] getFirstDaysOfMonthsArray(int[] months, int numOfDaysInYear, int moonPeriod,
+			int numOfMoonsPerMonth) {
 		// Check ob die Monats-Summe den Tagen des Jahres entspricht
 		int checkSum = 0;
 		for (int i = 0; i < months.length; i++) {
@@ -113,41 +104,46 @@ public class Vollmond {
 		// Hiernach -> Monate sind korrekt
 
 		// Interessante Tage berechnen
-		int[] interestingDays = new int[0];
+		int[] firstDaysOfMonthsArray = new int[0];
 		int currentDaysCounter = 1;
 		for (int i = 0; i < months.length; i++) {
 			if (months[i] > moonPeriod * (numOfMoonsPerMonth - 1)) {
 				for (int j = currentDaysCounter; j < currentDaysCounter + months[i]
 						- (moonPeriod * (numOfMoonsPerMonth - 1)); j++) {
-					interestingDays = addToIntArray(j, interestingDays);
+					firstDaysOfMonthsArray = addToIntArray(j, firstDaysOfMonthsArray);
 					// System.out.println("currently interesting Days: " +
-					// Arrays.toString(interestingDays));
+					// Arrays.toString(firstDaysOfMonthsArray));
 				}
 			}
 			currentDaysCounter += months[i];
 		}
 
-		return interestingDays;
+		return firstDaysOfMonthsArray;
 	}
 
 	/**
 	 * 
-	 * @param i           currentDay of the Year (1, ..., 365/366)
-	 * @param currentYear Current Year that should be in the return String
-	 * @param monthNames  Array of the Names of months (eg Januar, Februar, ...,
+	 * @param i           currentDay vom Jahr (1, ..., 365/366)
+	 * @param currentYear Current Year, welches im Return string sein soll
+	 * @param monthNames  Array der Namen der Monate (eg Januar, Februar, ...,
 	 *                    Dezember)
-	 * @return String of the Form
+	 * @return String der Form "currentyear, monthname"
 	 */
 	private static String convertDaysToMonth(int i, int currentYear, String[] monthNames) {
 
 		int arrayIndex = i / 30;
-		// System.out.println("arrayIndex: "+arrayIndex + ", i: "+i);
 		if (arrayIndex < monthNames.length)
 			return currentYear + ", " + monthNames[arrayIndex];
 
 		return "error";
 	}
 
+	/**
+	 * 
+	 * @param i		Nach welcher Zahl soll im Array gesucht werden
+	 * @param array	Array in welchem gesucht werden soll
+	 * @return	Boolean - true wenn int i im Array ist, false sonst
+	 */
 	public static boolean isInArray(int i, int[] array) {
 		for (int j = 0; j < array.length; j++) {
 			if (array[j] == i)
@@ -173,6 +169,9 @@ public class Vollmond {
 		return retArray;
 	}
 
+	// ----------------------------------------------------------------------------------
+	// Nicht Genutzt
+	// ----------------------------------------------------------------------------------
 	/**
 	 * 
 	 * @param toAdd     welcher String soll in das Array hinzugefügt werden
