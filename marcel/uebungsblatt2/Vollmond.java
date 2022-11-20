@@ -24,6 +24,9 @@ public class Vollmond {
 	 * @param startingMoonDayDate      An welchem Tag des Jahres gibt es das erste
 	 *                                 mal Vollmond
 	 * @param daysOfMonth              Wie viele Tage haben die einzelnen Monate
+	 * @param monthNames               Wie sind die Bezeichnungen der einzelnen
+	 *                                 Monate (eg. Januar, Februar, März, ...,
+	 *                                 Dezember)
 	 * @param numOfMoonsToFind         Wie viele gesuchte Monate sollen gefunden
 	 *                                 werden
 	 */
@@ -63,7 +66,8 @@ public class Vollmond {
 				}
 
 			}
-			// Berichtigung vom Abzug des Tages wenn es ein LeapYear ist und die Schleife nach dem ersten März ist
+			// Berichtigung vom Abzug des Tages wenn es ein LeapYear ist und die Schleife
+			// nach dem ersten März ist
 			if (isLeapYear && corrected)
 				currentDaysCounter++;
 
@@ -140,9 +144,9 @@ public class Vollmond {
 
 	/**
 	 * 
-	 * @param i		Nach welcher Zahl soll im Array gesucht werden
-	 * @param array	Array in welchem gesucht werden soll
-	 * @return	Boolean - true wenn int i im Array ist, false sonst
+	 * @param i     Nach welcher Zahl soll im Array gesucht werden
+	 * @param array Array in welchem gesucht werden soll
+	 * @return Boolean - true wenn int i im Array ist, false sonst
 	 */
 	public static boolean isInArray(int i, int[] array) {
 		for (int j = 0; j < array.length; j++) {
