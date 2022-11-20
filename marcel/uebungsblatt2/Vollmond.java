@@ -11,7 +11,7 @@ public class Vollmond {
 		findMoons(365, 29, 2, 2022, 1, daysOfMonth, monthNames, n);
 
 		long endTime = (System.currentTimeMillis() - startTime);
-		System.out.println("Habe " + n + " Monde in " + endTime + "ms gefunden");
+		// System.out.println("Habe " + n + " Monde in " + endTime + "ms gefunden");
 	}
 
 	/**
@@ -49,8 +49,12 @@ public class Vollmond {
 			int numOfDaysInCurrentYear = isLeapYear ? 366 : 365;
 
 			boolean corrected = false;
-			for (; currentDaysCounter <= numOfDaysInCurrentYear
+			for (; currentDaysCounter <= numOfDaysInCurrentYear-29
 					&& numOfFoundMoons < numOfMoonsToFind; currentDaysCounter += 29) {
+
+						// if(currentYear >= 2132){
+						// 	System.out.println("currentDaysCounter: "+currentDaysCounter);
+						// }
 				if (isLeapYear && currentDaysCounter >= dayDateOfFirstOfMarch && !corrected) {
 					// Wenn nach 29.2. und derzeit in einem Schaltjahr.
 					// Dann müssen wir einen Tag abziehen um den Tag (potenziell) in unserem
@@ -73,6 +77,7 @@ public class Vollmond {
 
 			// Hier werden die "verbleibenden" Tage der Mondperiode in das kommende Jahr
 			// übertragen
+			// System.out.println("currentDays at end: "+currentDaysCounter);
 			currentDaysCounter = currentDaysCounter - numOfDaysInCurrentYear;
 			currentYear++;
 		}
