@@ -1,6 +1,4 @@
-package abgaben.uebungsblatt2;
-
-public class Flugsimulation {
+public class FlugSimulator {
 	public static void main(String[] args) {
 		double fluggastErscheintWahrscheinlichkeit = 0.92;
 

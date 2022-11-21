@@ -1,5 +1,3 @@
-package abgaben.uebungsblatt2;
-
 public class Vollmond {
 	public static void main(String[] args) {
 		int n = Integer.parseInt(args[0]);
