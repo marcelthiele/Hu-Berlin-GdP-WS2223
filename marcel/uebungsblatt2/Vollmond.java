@@ -1,14 +1,16 @@
 package marcel.uebungsblatt2;
 
+import java.util.Arrays;
+
 public class Vollmond {
 	public static void main(String[] args) {
 		long startTime = System.currentTimeMillis();
-		int n = Integer.parseInt(args[0]);
-		int[] daysOfMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+		int n = 100; // Integer.parseInt(args[0]);
+		int[] daysOfMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 60 };
 		String[] monthNames = { "Januar", "Februar", "Maerz", "April", "Mai", "Juni", "Juli", "August", "September",
-				"Oktober", "November", "Dezember" };
+				"Oktober", "November", "Dezember", "Dezanuar" };
 
-		findMoons(365, 29, 2, 2022, 1, daysOfMonth, monthNames, n);
+		findMoons(425, 29, 2, 2022, 1, daysOfMonth, monthNames, n);
 
 		long endTime = (System.currentTimeMillis() - startTime);
 		// System.out.println("Habe " + n + " Monde in " + endTime + "ms gefunden");
@@ -46,15 +48,15 @@ public class Vollmond {
 
 		while (numOfFoundMoons < numOfMoonsToFind) {
 			boolean isLeapYear = getLeapYear(currentYear);
-			int numOfDaysInCurrentYear = isLeapYear ? 366 : 365;
+			int numOfDaysInCurrentYear = isLeapYear ? numOfDaysPerYear + 1 : numOfDaysPerYear;
 
 			boolean corrected = false;
-			for (; currentDaysCounter <= numOfDaysInCurrentYear-29
+			for (; currentDaysCounter <= numOfDaysInCurrentYear - 29
 					&& numOfFoundMoons < numOfMoonsToFind; currentDaysCounter += 29) {
 
-						// if(currentYear >= 2132){
-						// 	System.out.println("currentDaysCounter: "+currentDaysCounter);
-						// }
+				// if(currentYear >= 2132){
+				// System.out.println("currentDaysCounter: "+currentDaysCounter);
+				// }
 				if (isLeapYear && currentDaysCounter >= dayDateOfFirstOfMarch && !corrected) {
 					// Wenn nach 29.2. und derzeit in einem Schaltjahr.
 					// Dann müssen wir einen Tag abziehen um den Tag (potenziell) in unserem
@@ -65,7 +67,7 @@ public class Vollmond {
 
 				if (isInArray(currentDaysCounter, firstDaysOfMonthsArray)) {
 					// Ist ein Doppelvollmond-Monat
-					System.out.println(convertDaysToMonth(currentDaysCounter, currentYear, monthNames));
+					System.out.println(convertDaysToMonth(currentDaysCounter, currentYear, monthNames, daysOfMonth));
 					numOfFoundMoons++;
 				}
 
@@ -120,8 +122,7 @@ public class Vollmond {
 				for (int j = currentDaysCounter; j < currentDaysCounter + months[i]
 						- (moonPeriod * (numOfMoonsPerMonth - 1)); j++) {
 					firstDaysOfMonthsArray = addToIntArray(j, firstDaysOfMonthsArray);
-					// System.out.println("currently interesting Days: " +
-					// Arrays.toString(firstDaysOfMonthsArray));
+					System.out.println("currently interesting Days: " + Arrays.toString(firstDaysOfMonthsArray));
 				}
 			}
 			currentDaysCounter += months[i];
@@ -138,9 +139,18 @@ public class Vollmond {
 	 *                    Dezember)
 	 * @return String der Form "currentyear, monthname"
 	 */
-	private static String convertDaysToMonth(int i, int currentYear, String[] monthNames) {
+	private static String convertDaysToMonth(int i, int currentYear, String[] monthNames, int[] daysOfMonth) {
 
-		int arrayIndex = i / 30;
+		int arrayIndex = 0;
+		int sumOfPrevMonths = 0;
+		for (int j = 0; j < monthNames.length; j++) {
+			sumOfPrevMonths += daysOfMonth[j];
+			if (sumOfPrevMonths >= i) {
+				arrayIndex = j;
+				break;
+			}
+		}
+
 		if (arrayIndex < monthNames.length)
 			return currentYear + ", " + monthNames[arrayIndex];
 
