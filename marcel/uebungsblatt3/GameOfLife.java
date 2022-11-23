@@ -32,10 +32,8 @@ public class GameOfLife{
         for(int i = 0; i < numOfLivingCells; i++){
             int x_read = StdIn.readInt();
             int y_read = StdIn.readInt();
-            // int x_pos = wrapX(x_read, mapOfCells);
-            // int y_pos = wrapY(y_read, mapOfCells);
-            int x_pos = x_read;
-            int y_pos = y_read;
+            int x_pos = wrapX(x_read, mapOfCells);
+            int y_pos = wrapY(y_read, mapOfCells);
 
             mapOfCells[x_pos][y_pos] = true;
         }
@@ -121,7 +119,7 @@ public class GameOfLife{
 
     private static int wrapY(int y_pos, boolean[][] mapOfCells) {
         if(y_pos < 0) return mapOfCells[0].length+y_pos;
-        if(y_pos >= mapOfCells[0].length) return y_pos - mapOfCells.length;
+        if(y_pos >= mapOfCells[0].length) return y_pos - mapOfCells[0].length;
         return y_pos;
     }
     
