@@ -4,7 +4,7 @@ import gdp.stdlib.StdDraw;
 import gdp.stdlib.StdIn;
 import gdp.stdlib.StdOut;
 
-public class GameOfLife{
+public class GameOfLife_done{
 
     public static void main(String[] args){
         int x_length = StdIn.readInt();

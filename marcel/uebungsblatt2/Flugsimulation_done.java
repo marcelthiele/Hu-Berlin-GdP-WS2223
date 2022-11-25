@@ -1,6 +1,6 @@
 package marcel.uebungsblatt2;
 
-public class Flugsimulation {
+public class Flugsimulation_done {
 	public static void main(String[] args) {
 		double fluggastErscheintWahrscheinlichkeit = 0.92;
 

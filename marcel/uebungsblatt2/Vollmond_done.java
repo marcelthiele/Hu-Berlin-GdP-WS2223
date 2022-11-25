@@ -2,7 +2,7 @@ package marcel.uebungsblatt2;
 
 import java.util.Arrays;
 
-public class Vollmond {
+public class Vollmond_done {
 	public static void main(String[] args) {
 		long startTime = System.currentTimeMillis();
 		int n = 100; // Integer.parseInt(args[0]);

@@ -2,7 +2,7 @@ package marcel.praktikum2;
 
 import java.math.BigInteger;
 
-public class Nolindrom {
+public class Nolindrom_done {
 
     // TODO checken ob alles funktioniert
 

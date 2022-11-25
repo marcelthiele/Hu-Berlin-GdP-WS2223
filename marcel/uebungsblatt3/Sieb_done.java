@@ -1,6 +1,6 @@
 package marcel.uebungsblatt3;
 
-public class Sieb {
+public class Sieb_done {
     public static void main(String[] args) {
         int M = Integer.parseInt(args[0]);
         int N = M;
