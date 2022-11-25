@@ -4,8 +4,6 @@ import java.math.BigInteger;
 
 public class Nolindrom_done {
 
-    // TODO checken ob alles funktioniert
-
     public static void main(String[] args) {
         int numToTest = Integer.parseInt(args[0]);
         if (args.length == 2) {
@@ -17,24 +15,27 @@ public class Nolindrom_done {
         }
     }
 
+    /**
+     * 
+     * @param numToTest Up to which number Nolindromes should be searched for
+     * @param finishOnFirstOccurence    Whether to print out only the first occurence of a Nolindrome that would have NOT been found by searching for it with Long -> see getNolindromsWithLong()
+     */
     public static void getNolindroms(int numToTest, boolean finishOnFirstOccurence) {
         String N = "0";
         String R = "0";
         int steps = 0;
 
-        boolean hasFoundPalindromeWhenLongCanceled = false;
+        boolean hasFoundNolindromWhenLongCanceled = false;
 
         for (int i = 0; i <= numToTest; i++) {
             boolean currentIIsPalindrom = false;
             N = "" + i;
-            // System.out.println("N ist jetzt: " + N.toString());
 
             boolean canceledOnOverflow = false;
 
             while (steps <= 100) {
                 R = getReverse(N);
                 if (isPalindrom(add(N, R))) {
-                    // System.out.println(i + " führt zu Palindrom: " + add(N, R));
                     currentIIsPalindrom = true;
                     break;
                 } else {
@@ -44,34 +45,37 @@ public class Nolindrom_done {
 
                 if (!canceledOnOverflow) {
                     try {
-                        long test = Long.parseLong(N) + Long.parseLong(R);
+                        long temp = Long.parseLong(N) + Long.parseLong(R);
                     } catch (Exception e) {
                         canceledOnOverflow = true;
                     }
                 }
 
-                // System.out.println("N : " + N + ", R: " + R + ", N+R: " + add(N, R) + ",
-                // steps: " + steps);
-
                 steps++;
             }
             if (canceledOnOverflow && currentIIsPalindrom) {
-                // Wenn mit long abgebrochen wäre, aber nach exaktem rechnen doch ein palindrom
-                // ist
+                // Wenn mit long abgebrochen wäre, aber nach exaktem rechnen doch ein palindrom ist
                 System.out.println(i + " braucht " + steps + " Iterationen bis zum Palindrom " + N);
-                hasFoundPalindromeWhenLongCanceled = true;
+                hasFoundNolindromWhenLongCanceled = true;
 
-                if (finishOnFirstOccurence)
+                if (finishOnFirstOccurence) // Wenn false, werden ALLE Zahlen ausgegeben, die zu einem Nolindrom geführt hätten, nicht nur die erste
                     return;
             }
             steps = 1;
         }
 
-        if (!hasFoundPalindromeWhenLongCanceled) {
+        if (!hasFoundNolindromWhenLongCanceled) {
+            // Wenn KEIN Nolindrom gefunden wurde, welches durch long NICHT ERKANNT worden wäre
             System.out.println("alle Zahlen werden auch durch Abbruch per Ueberlauf gefunden");
         }
     }
 
+    /***
+     * Prints all Nolindroms up to `numToTest`
+     * Caution: could overflow because of Long.MAXVALUE
+     * 
+     * @param numToTest up to which number Nolindromes should be found
+     */
     public static void getNolindromsWithLong(int numToTest) {
         long N = 0;
         long R = 0;
@@ -106,7 +110,7 @@ public class Nolindrom_done {
 
     /**
      * 
-     * @param l
+     * @param l Any String that should be checked whether it is a Palindrom
      * @return returns whether i is a Palindrom (1001, 2002, 3113,...)
      */
     private static boolean isPalindrom(String l) {
@@ -115,8 +119,8 @@ public class Nolindrom_done {
 
     /**
      * 
-     * @param n
-     * @return reversed number from n (eg. 123 -> 321)
+     * @param n Any String
+     * @return reversed String from n (eg. 123 -> 321, abc -> cba)
      */
     private static String getReverse(String n) {
         String nAsString = n;
@@ -129,14 +133,16 @@ public class Nolindrom_done {
             reverseString += nAsCharArray[nAsCharArray.length - 1 - i];
         }
 
-        // System.out.println(reverseString + " is reverse of: " + n);
-
-        // System.out.println("reverseString: " + new
-        // BigInteger(reverseString).toString());
-
         return reverseString;
     }
 
+    /**
+     * Adds any two given Numbers - No overflow "possible"
+     * 
+     * @param a Any Number as String representation
+     * @param b Any Number as String representation
+     * @return  String containing the sum of a and b
+     */
     private static String add(String a, String b) {
         char[] aAsCharArray = a.toCharArray();
         char[] bAsCharArray = b.toCharArray();
@@ -147,7 +153,7 @@ public class Nolindrom_done {
 
         int imSinn = 0;
         for (int i = 0; i < biggerArray; i++) {
-            // Von hinten durch die Zahlen durchlaufen
+            // Loop from Back to Forth - "Schrifliches Addieren" lol
             int currentNumberFromA;
             int currentNumberFromB;
 
