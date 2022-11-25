@@ -93,7 +93,6 @@ public class Nolindrom {
                     N = N + R;
                     steps++;
                 } catch (NumberFormatException e) {
-                    System.out.println("Abgebrochen bei " + (N - R));
                     break;
                 }
             }
