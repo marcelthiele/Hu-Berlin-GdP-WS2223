@@ -10,19 +10,19 @@ public class Nolindrom {
         int numToTest = Integer.parseInt(args[0]);
         if (args.length == 2) {
             if (args[1].equals("x")) {
-                getNolindroms(numToTest);
+                getNolindroms(numToTest, true);
             }
         } else {
             getNolindromsWithLong(numToTest);
         }
     }
 
-    public static void getNolindroms(int numToTest) {
+    public static void getNolindroms(int numToTest, boolean finishOnFirstOccurence) {
         String N = "0";
         String R = "0";
         int steps = 0;
 
-        long NAsLong = 0;
+        boolean hasFoundPalindromeWhenLongCanceled = false;
 
         for (int i = 0; i <= numToTest; i++) {
             boolean currentIIsPalindrom = false;
@@ -44,9 +44,9 @@ public class Nolindrom {
 
                 if (!canceledOnOverflow) {
                     try {
-                        NAsLong = Long.parseLong(N) + Long.parseLong(R);
+                        long test = Long.parseLong(N) + Long.parseLong(R);
                     } catch (Exception e) {
-                       canceledOnOverflow = true;
+                        canceledOnOverflow = true;
                     }
                 }
 
@@ -59,8 +59,16 @@ public class Nolindrom {
                 // Wenn mit long abgebrochen wäre, aber nach exaktem rechnen doch ein palindrom
                 // ist
                 System.out.println(i + " braucht " + steps + " Iterationen bis zum Palindrom " + N);
+                hasFoundPalindromeWhenLongCanceled = true;
+
+                if (finishOnFirstOccurence)
+                    return;
             }
-            steps = 0;
+            steps = 1;
+        }
+
+        if (!hasFoundPalindromeWhenLongCanceled) {
+            System.out.println("alle Zahlen werden auch durch Abbruch per Ueberlauf gefunden");
         }
     }
 
@@ -156,13 +164,13 @@ public class Nolindrom {
             }
 
             int currentSum = currentNumberFromA + currentNumberFromB + imSinn;
-            // System.out.println("summe von " + currentNumberFromA + " + " + currentNumberFromB + " + "+ imSinn + " = " + currentSum);
 
             imSinn = (int) (currentSum / 10);
             currentSum = currentSum % 10;
 
-            if(i == biggerArray-1 && imSinn > 0){
-                currentSum = currentSum + imSinn*10;
+            if (i == biggerArray - 1 && imSinn > 0) {
+                // Wenn die letzte Zahl noch einsimsinn hat, dann müssen beide ziffern angehangen werden
+                currentSum = currentSum + imSinn * 10;
             }
             returnString = currentSum + returnString;
         }
@@ -180,7 +188,6 @@ public class Nolindrom {
             }
         }
 
-        // System.out.println(a + " + " + b + " = " + returnString);
 
         return returnString;
     }
