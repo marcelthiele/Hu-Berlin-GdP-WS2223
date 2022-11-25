@@ -1,7 +1,4 @@
 package marcel.praktikum2;
-
-import java.math.BigInteger;
-
 public class Nolindrom_done {
 
     public static void main(String[] args) {
