@@ -51,15 +51,9 @@ public class GameOfLife{
         for(int x = 0; x < x_length; x++){
             for(int y = 0; y < y_length; y++){
                 int numOfNeighbours = getNumOfNeighbours(x, y, mapOfCells);
-                if(mapOfCells[x][y] == false) {
-                    if(numOfNeighbours == 3)
-                        newMapOfCells[x][y] = true;
-                }
-                if(mapOfCells[x][y] == true){
-                    if(numOfNeighbours == 0 || numOfNeighbours == 1) newMapOfCells[x][y] = false;
-                    if(numOfNeighbours >= 4) newMapOfCells[x][y] = false;
-                    if(numOfNeighbours == 2 || numOfNeighbours == 3) newMapOfCells[x][y] = true;
-                }
+                if(mapOfCells[x][y] == false && numOfNeighbours == 3) newMapOfCells[x][y] = true;
+                else if(mapOfCells[x][y] == true && (numOfNeighbours == 3 || numOfNeighbours == 2)) newMapOfCells[x][y] = true;
+                else newMapOfCells[x][y] = false;
             }
         }
         return newMapOfCells;
