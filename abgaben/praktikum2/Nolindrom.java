@@ -14,7 +14,7 @@ public class Nolindrom {
 
         if (args.length == 2) {
             if (args[1].equals("x")) {
-                getNolindroms(numToTest, true);
+                getNolindroms(numToTest, false);
             }
         } else {
             getNolindromsWithLong(numToTest);
