@@ -32,13 +32,13 @@ public class Nolindrom_done {
 
             while (steps <= 100) {
                 R = getReverse(N);
-                if (isPalindrom(add(N, R))) {
+                N = add(N, R);
+                if (isPalindrom(N)) {
                     currentIIsPalindrom = true;
                     break;
                 } else {
                     currentIIsPalindrom = false;
                 }
-                N = add(N, R);
 
                 if (!canceledOnOverflow) {
                     try {
@@ -190,6 +190,7 @@ public class Nolindrom_done {
             }
         }
 
+        // System.out.println(a + " + " + b + " = " + returnString);
 
         return returnString;
     }
