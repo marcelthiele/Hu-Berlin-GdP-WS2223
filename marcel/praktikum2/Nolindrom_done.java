@@ -5,7 +5,7 @@ public class Nolindrom_done {
         int numToTest = Integer.parseInt(args[0]);
         if (args.length == 2) {
             if (args[1].equals("x")) {
-                getNolindroms(numToTest, true);
+                getNolindromsNotFoundWithLong(numToTest, true);
             }
         } else {
             getNolindromsWithLong(numToTest);
@@ -17,7 +17,7 @@ public class Nolindrom_done {
      * @param numToTest Up to which number Nolindromes should be searched for
      * @param finishOnFirstOccurence    Whether to print out only the first occurence of a Nolindrome that would have NOT been found by searching for it with Long -> see getNolindromsWithLong()
      */
-    public static void getNolindroms(int numToTest, boolean finishOnFirstOccurence) {
+    public static void getNolindromsNotFoundWithLong(int numToTest, boolean finishOnFirstOccurence) {
         String N = "0";
         String R = "0";
         int steps = 0;
