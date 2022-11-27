@@ -14,7 +14,7 @@ public class Nolindrom {
 
         if (args.length == 2) {
             if (args[1].equals("x")) {
-                getNolindroms(numToTest, true);
+                getNolindromsNotFoundWithLong(numToTest, true);
             }
         } else {
             getNolindromsWithLong(numToTest);
@@ -26,7 +26,7 @@ public class Nolindrom {
      * @param numToTest Up to which number Nolindromes should be searched for
      * @param finishOnFirstOccurence    Whether to print out only the first occurence of a Nolindrome that would have NOT been found by searching for it with Long -> see getNolindromsWithLong()
      */
-    public static void getNolindroms(int numToTest, boolean finishOnFirstOccurence) {
+    public static void getNolindromsNotFoundWithLong(int numToTest, boolean finishOnFirstOccurence) {
         String N = "0";
         String R = "0";
         int steps = 0;
@@ -41,13 +41,13 @@ public class Nolindrom {
 
             while (steps <= 100) {
                 R = getReverse(N);
-                if (isPalindrom(add(N, R))) {
+                N = add(N, R);
+                if (isPalindrom(N)) {
                     currentIIsPalindrom = true;
                     break;
                 } else {
                     currentIIsPalindrom = false;
                 }
-                N = add(N, R);
 
                 if (!canceledOnOverflow) {
                     try {
@@ -199,6 +199,7 @@ public class Nolindrom {
             }
         }
 
+        // System.out.println(a + " + " + b + " = " + returnString);
 
         return returnString;
     }
