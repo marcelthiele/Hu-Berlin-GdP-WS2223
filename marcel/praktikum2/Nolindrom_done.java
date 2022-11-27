@@ -2,7 +2,18 @@ package marcel.praktikum2;
 public class Nolindrom_done {
 
     public static void main(String[] args) {
+        if (args.length == 0) {
+			System.out.println("Bitte geben Sie die Obergrenze als Parameter an.");
+			System.exit(-1);
+		}
         int numToTest = Integer.parseInt(args[0]);
+
+		if (numToTest > 100000) {
+			System.out.println("Bitte geben Sie die Obergrenze als Parameter an.");
+			System.exit(-1);
+		}
+
+        
         if (args.length == 2) {
             if (args[1].equals("x")) {
                 getNolindromsNotFoundWithLong(numToTest, true);
