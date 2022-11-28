@@ -129,7 +129,13 @@ public class Bigs {
      * @return
      */
     static int[] copy(int[] n) {
-        return n;
+        int[] retArray = new int[n.length];
+
+        for(int i = 0; i < n.length; i++){
+            retArray[i] = n[i];
+        }
+
+        return retArray;
     }
 
     /**
@@ -270,7 +276,9 @@ public class Bigs {
         // maxDigit(a);
         // maxDigit(b);
 
-        System.out.println(equal(a, b));
+        // System.out.println(equal(a, b));
+
+
 
         // int[] a = One();
 
