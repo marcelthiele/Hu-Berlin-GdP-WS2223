@@ -71,7 +71,9 @@ public class Bigs {
      * @return
      */
     static int[] digit(int d) {
-        return null;
+        int[] retInt = {d};
+        
+        return retInt;
     }
 
     /**
