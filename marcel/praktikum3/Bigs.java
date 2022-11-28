@@ -208,7 +208,7 @@ public class Bigs {
      * @return
      */
     static int[] square(int[] a) {
-        return a;
+        return times(a, a);
     }
 
     /**
@@ -218,7 +218,7 @@ public class Bigs {
      * @return
      */
     static int[] cubic(int[] a) {
-        return a;
+        return times(times(a, a), a);
     }
 
     /**
