@@ -61,7 +61,7 @@ public class Bigs {
 
         // TODO lange zahlen. siehe oben
 
-        System.out.print(printString);
+        System.out.print(printString+"\n");
     }
 
     /**
@@ -169,7 +169,12 @@ public class Bigs {
      * @return
      */
     static int[] times10(int[] n) {
-        return n;
+        int[] retInt = new int[n.length+1];
+        for(int i = 0; i < n.length; i++){
+            retInt[i+1] = n[i];
+        }
+
+        return retInt;
     }
 
     /**
@@ -310,7 +315,7 @@ public class Bigs {
 
         int[] from = fromInt(123456799);
         int[] from2 = fromInt(123456699);
-        System.out.println(less(from, from2));
+        print(times10(from));
 
         // int[] a = One();
 
