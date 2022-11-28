@@ -119,7 +119,18 @@ public class Bigs {
      * @return
      */
     static int[] fromInt(int n) {
-        return null;
+        //Quick and dirty
+
+        String nAsString = ""+n;
+        char[] nAsCharArray = nAsString.toCharArray();
+
+        int[] retArray = new int[nAsCharArray.length];
+
+        for(int i = 0; i < nAsCharArray.length; i++){
+            retArray[i] = Integer.parseInt(nAsCharArray[nAsCharArray.length - 1 - i]+"");
+        }
+
+        return retArray;
     }
 
     /**
@@ -277,6 +288,11 @@ public class Bigs {
         // maxDigit(b);
 
         // System.out.println(equal(a, b));
+
+
+
+        int[] from = fromInt(123456799);
+        System.out.println(equal(a, from));
 
 
 
