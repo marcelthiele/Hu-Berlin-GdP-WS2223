@@ -203,7 +203,13 @@ public class Bigs {
      * @return
      */
     static boolean equal(int[] a, int[] b) {
-        return false;
+        if(a.length != b.length) return false;
+
+        for(int i = 0; i < a.length; i++){
+            if(a[i] != b[i]) return false;
+        }
+
+        return true;
     }
 
     /**
@@ -254,15 +260,17 @@ public class Bigs {
     public static void main(String[] args) {
 
         int[] a = { 9, 9, 7, 6, 5, 4, 3, 2, 1 };
-        int[] b = { 0, 2, 3, 4, 5, 6, 7, 8, 9 };
+        int[] b = { 9, 9, 7, 7, 5, 4, 3, 2, 1 };
 
         // int[] added = add(a, b);
         // System.out.println();
         // System.out.println("Added:");
         // print(added);
 
-        maxDigit(a);
-        maxDigit(b);
+        // maxDigit(a);
+        // maxDigit(b);
+
+        System.out.println(equal(a, b));
 
         // int[] a = One();
 
