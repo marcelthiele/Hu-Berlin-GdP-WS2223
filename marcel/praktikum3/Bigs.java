@@ -168,7 +168,11 @@ public class Bigs {
      * @return
      */
     static int[] times(int[] n, int d) {
-        return n;
+        int[] retArray = copy(n);
+        for (int i = 1; i < d; i++) {
+            retArray = add(retArray, n);
+        }
+        return retArray;
     }
 
     /**
