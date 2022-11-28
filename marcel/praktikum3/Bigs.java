@@ -17,7 +17,14 @@ public class Bigs {
 
         int imSinn = 0;
         for (int i = 0; i < biggerArrayLength; i++) {
-            int currentSum = a[i] + b[i] + imSinn;
+            int currentA = 0;
+            int currentB = 0;
+            if (i < a.length)
+                currentA = a[i];
+            if (i < b.length)
+                currentB = b[i];
+
+            int currentSum = currentA + currentB + imSinn;
             imSinn = currentSum / 10;
             currentSum = currentSum % 10;
             retArray[i] = currentSum;
@@ -33,6 +40,8 @@ public class Bigs {
             for (int i = 0; i < retArray.length - 1; i++) {
                 trueRetArray[i] = retArray[i];
             }
+
+            retArray = trueRetArray;
         }
 
         // DEBUG PURPOSES
@@ -61,7 +70,7 @@ public class Bigs {
 
         // TODO lange zahlen. siehe oben
 
-        System.out.print(printString+"\n");
+        System.out.print(printString + "\n");
     }
 
     /**
@@ -169,9 +178,9 @@ public class Bigs {
      * @return
      */
     static int[] times10(int[] n) {
-        int[] retInt = new int[n.length+1];
-        for(int i = 0; i < n.length; i++){
-            retInt[i+1] = n[i];
+        int[] retInt = new int[n.length + 1];
+        for (int i = 0; i < n.length; i++) {
+            retInt[i + 1] = n[i];
         }
 
         return retInt;
@@ -225,8 +234,9 @@ public class Bigs {
         }
 
         boolean soFarEqual = true;
-        for(int i = 0; i < a.length; i++){
-            if(a[i] < b[i] && soFarEqual) return true;
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] < b[i] && soFarEqual)
+                return true;
         }
 
         return false;
@@ -315,7 +325,7 @@ public class Bigs {
 
         int[] from = fromInt(123456799);
         int[] from2 = fromInt(123456699);
-        print(times10(from));
+        print(times(from, 10));
 
         // int[] a = One();
 
