@@ -232,22 +232,37 @@ public class Bigs {
     }
 
     /**
-     * Gibt die (kleinste) Ziffer mit der groessten Haeufigkeitn in n aus
+     * Gibt die (kleinste) Ziffer mit der groessten Haeufigkeitn in n aus.
+     * Achtung: Kein check auf ok() -> muss vorher selbst durchgeführt werden
      * 
      * @param n
      */
     static void maxDigit(int[] n) {
+        int[] verteilung = new int[10]; // Hier werden die absoluten Haeufigkeiten der ziffern drin gespeichert, Wie oft ist 0, wie oft ist 1 usw...
+
+        for(int i = 0; i < n.length; i++){
+            verteilung[n[i]]++;
+        }
+
+        int currentlyHaeufigstes = 0;
+        for(int j = 0; j < verteilung.length; j++){
+            if(verteilung[j] > verteilung[currentlyHaeufigstes]) currentlyHaeufigstes = j;
+        }
+        System.out.println("Häufigste Ziffer ist: " + currentlyHaeufigstes);
     }
 
     public static void main(String[] args) {
 
-        int[] a = { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
-        int[] b = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        int[] a = { 9, 9, 7, 6, 5, 4, 3, 2, 1 };
+        int[] b = { 0, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-        int[] added = add(a, b);
-        System.out.println();
-        System.out.println("Added:");
-        print(added);
+        // int[] added = add(a, b);
+        // System.out.println();
+        // System.out.println("Added:");
+        // print(added);
+
+        maxDigit(a);
+        maxDigit(b);
 
         // int[] a = One();
 
