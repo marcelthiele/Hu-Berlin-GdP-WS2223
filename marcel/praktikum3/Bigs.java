@@ -82,7 +82,7 @@ public class Bigs {
      * @return
      */
     static int[] Null() {
-        return null;
+        return digit(0);
     }
 
     /**
@@ -91,7 +91,7 @@ public class Bigs {
      * @return
      */
     static int[] One() {
-        return null;
+        return digit(1);
     }
 
     /**
