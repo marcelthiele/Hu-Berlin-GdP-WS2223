@@ -110,7 +110,7 @@ public class Bigs {
      * @return
      */
     static int mod10(int[] n) {
-        return 0;
+        return n[0]; 
     }
 
     /**
@@ -120,6 +120,7 @@ public class Bigs {
      * @return
      */
     static int[] div10(int[] n) {
+        //TODO
         return n;
     }
 
@@ -198,6 +199,7 @@ public class Bigs {
      * @return
      */
     static int[] times(int[] a, int[] b) {
+        //TODO 
         return b;
     }
 
@@ -327,9 +329,9 @@ public class Bigs {
 
         // System.out.println(equal(a, b));
 
-        int[] from = fromInt(123456799);
-        int[] from2 = fromInt(123456699);
-        print(times(from, 10));
+        int[] from = fromInt(123456798);
+        int[] from2 = fromInt(123456698);
+        System.out.println(mod10(from));
 
         // int[] a = One();
 
