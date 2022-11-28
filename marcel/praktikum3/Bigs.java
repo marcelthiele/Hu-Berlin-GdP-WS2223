@@ -9,9 +9,8 @@ public class Bigs {
      * @return
      */
     public static int[] add(int[] a, int[] b) {
-        // FIXME Works!
         int biggerArrayLength = a.length > b.length ? a.length : b.length;
-        System.out.println("Bigger array Length: " + biggerArrayLength);
+        // System.out.println("Bigger array Length: " + biggerArrayLength);
 
         int[] retArray = new int[biggerArrayLength + 1]; // Eine Stelle mehr, falls die beiden vorletzten Ziffern aus a
                                                          // und b mehr als 10 ergeben
@@ -27,24 +26,21 @@ public class Bigs {
         if (imSinn > 0)
             retArray[retArray.length - 1] = imSinn;
 
-        //TODO das könnte man auch anders machen: wenn imSinn == 0 ist, sind wir sicher, dass die letzte Stelle von retArray entfernt werden muss. Somit ist der Check mit ok und so weiter gar nicht notwendig i Think
+        if (imSinn == 0) {
+            // Remove "leading Zero"
+            int[] trueRetArray = new int[retArray.length - 1];
 
-        if (!ok(retArray)) {
-            if (retArray[retArray.length - 1] == 0) {
-                // Remove "leading Zero"
-                int[] trueRetArray = new int[retArray.length - 1];
-
-                for (int i = 0; i < retArray.length - 1; i++) {
-                    trueRetArray[i] = retArray[i];
-                }
+            for (int i = 0; i < retArray.length - 1; i++) {
+                trueRetArray[i] = retArray[i];
             }
         }
 
-        print(a);
-        System.out.print(" + ");
-        print(b);
-        System.out.print(" = ");
-        print(retArray);
+        // DEBUG PURPOSES
+        // print(a);
+        // System.out.print(" + ");
+        // print(b);
+        // System.out.print(" = ");
+        // print(retArray);
 
         return retArray;
     }
@@ -59,11 +55,11 @@ public class Bigs {
     static void print(int[] n) {
         String printString = "";
 
-        for(int i = n.length-1; i >= 0; i--){
+        for (int i = n.length - 1; i >= 0; i--) {
             printString += n[i];
         }
 
-        //TODO lange zahlen. siehe oben
+        // TODO lange zahlen. siehe oben
 
         System.out.print(printString);
     }
@@ -245,19 +241,18 @@ public class Bigs {
 
     public static void main(String[] args) {
 
-        int[] a = {9, 8, 7, 6, 5, 4, 3, 2, 1};
-        int[] b = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] a = { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+        int[] b = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
         int[] added = add(a, b);
         System.out.println();
         System.out.println("Added:");
         print(added);
 
-
         // int[] a = One();
 
         // for (int i = 0; i < 33222; i++) {
-        //     a = times(a, 2);
+        // a = times(a, 2);
         // }
 
         // System.out.println("2^33222 hat " + a.length + " Stellen");
@@ -269,7 +264,7 @@ public class Bigs {
         // int[] c = copy(b);
 
         // for (int i = 0; i < 8978; i++) {
-        //     c = times(c, b);
+        // c = times(c, b);
         // }
 
         // System.out.println("13^8978 hat " + c.length + " Stellen");
