@@ -71,8 +71,8 @@ public class Bigs {
      * @return
      */
     static int[] digit(int d) {
-        int[] retInt = {d};
-        
+        int[] retInt = { d };
+
         return retInt;
     }
 
@@ -121,15 +121,15 @@ public class Bigs {
      * @return
      */
     static int[] fromInt(int n) {
-        //Quick and dirty
+        // Quick and dirty
 
-        String nAsString = ""+n;
+        String nAsString = "" + n;
         char[] nAsCharArray = nAsString.toCharArray();
 
         int[] retArray = new int[nAsCharArray.length];
 
-        for(int i = 0; i < nAsCharArray.length; i++){
-            retArray[i] = Integer.parseInt(nAsCharArray[nAsCharArray.length - 1 - i]+"");
+        for (int i = 0; i < nAsCharArray.length; i++) {
+            retArray[i] = Integer.parseInt(nAsCharArray[nAsCharArray.length - 1 - i] + "");
         }
 
         return retArray;
@@ -144,7 +144,7 @@ public class Bigs {
     static int[] copy(int[] n) {
         int[] retArray = new int[n.length];
 
-        for(int i = 0; i < n.length; i++){
+        for (int i = 0; i < n.length; i++) {
             retArray[i] = n[i];
         }
 
@@ -211,6 +211,19 @@ public class Bigs {
      * @return
      */
     static boolean less(int[] a, int[] b) {
+        if (!ok(a) || !ok(b)) {
+            return false;
+        }
+
+        if (a.length != b.length) {
+            return a.length < b.length;
+        }
+
+        boolean soFarEqual = true;
+        for(int i = 0; i < a.length; i++){
+            if(a[i] < b[i] && soFarEqual) return true;
+        }
+
         return false;
     }
 
@@ -222,10 +235,12 @@ public class Bigs {
      * @return
      */
     static boolean equal(int[] a, int[] b) {
-        if(a.length != b.length) return false;
+        if (a.length != b.length)
+            return false;
 
-        for(int i = 0; i < a.length; i++){
-            if(a[i] != b[i]) return false;
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != b[i])
+                return false;
         }
 
         return true;
@@ -263,15 +278,17 @@ public class Bigs {
      * @param n
      */
     static void maxDigit(int[] n) {
-        int[] verteilung = new int[10]; // Hier werden die absoluten Haeufigkeiten der ziffern drin gespeichert, Wie oft ist 0, wie oft ist 1 usw...
+        int[] verteilung = new int[10]; // Hier werden die absoluten Haeufigkeiten der ziffern drin gespeichert, Wie oft
+                                        // ist 0, wie oft ist 1 usw...
 
-        for(int i = 0; i < n.length; i++){
+        for (int i = 0; i < n.length; i++) {
             verteilung[n[i]]++;
         }
 
         int currentlyHaeufigstes = 0;
-        for(int j = 0; j < verteilung.length; j++){
-            if(verteilung[j] > verteilung[currentlyHaeufigstes]) currentlyHaeufigstes = j;
+        for (int j = 0; j < verteilung.length; j++) {
+            if (verteilung[j] > verteilung[currentlyHaeufigstes])
+                currentlyHaeufigstes = j;
         }
         System.out.println("Häufigste Ziffer ist: " + currentlyHaeufigstes);
     }
@@ -291,12 +308,9 @@ public class Bigs {
 
         // System.out.println(equal(a, b));
 
-
-
         int[] from = fromInt(123456799);
-        System.out.println(equal(a, from));
-
-
+        int[] from2 = fromInt(123456699);
+        System.out.println(less(from, from2));
 
         // int[] a = One();
 
