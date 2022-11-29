@@ -125,9 +125,9 @@ public class Bigs {
             retArray[retArray.length-1-i] = n[n.length-1-i];
         }
 
-        print(n);
-        System.out.print("/10 = ");
-        print(retArray);
+        // print(n);
+        // System.out.print("/10 = ");
+        // print(retArray);
 
         return retArray;
     }
@@ -227,11 +227,11 @@ public class Bigs {
             }
         }
 
-        print(a);
-        System.out.print(" * ");
-        print(b);
-        System.out.print(" = ");
-        print(summe);
+        // print(a);
+        // System.out.print(" * ");
+        // print(b);
+        // System.out.print(" = ");
+        // print(summe);
 
         return summe;
     }
