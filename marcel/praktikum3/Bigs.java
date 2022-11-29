@@ -120,8 +120,16 @@ public class Bigs {
      * @return
      */
     static int[] div10(int[] n) {
-        //TODO
-        return n;
+        int[] retArray = new int[n.length -1];
+        for(int i = 0; i < retArray.length; i++){
+            retArray[retArray.length-1-i] = n[n.length-1-i];
+        }
+
+        print(n);
+        System.out.print("/10 = ");
+        print(retArray);
+
+        return retArray;
     }
 
     /**
@@ -358,7 +366,9 @@ public class Bigs {
         // int[] from2 = fromInt(123456698);
         // System.out.println(mod10(from));
 
-        times(times(fromInt(100000000), fromInt(100000000)), times(fromInt(100000000), fromInt(100000000)));
+        // times(times(fromInt(100000000), fromInt(100000000)), times(fromInt(100000000), fromInt(100000000)));
+
+        // div10(fromInt(10000006));
 
         // int[] a = One();
 
