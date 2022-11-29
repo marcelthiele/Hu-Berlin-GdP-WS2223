@@ -145,6 +145,7 @@ public class Bigs {
         return retArray;
     }
 
+
     /**
      * Kopiert den Wert von n
      * 
@@ -199,8 +200,32 @@ public class Bigs {
      * @return
      */
     static int[] times(int[] a, int[] b) {
-        //TODO 
-        return b;
+
+        int[] summe = Null();
+        for(int aIndex = 0; aIndex < a.length; aIndex++){
+            for(int bIndex = 0; bIndex < b.length; bIndex++){
+                int[] tempSumme = fromInt(a[aIndex] * b[bIndex]); // FIXME could break wenn bIndex sehr gross ist
+                for(int i = 0; i < bIndex; i++){
+                    tempSumme = times10(tempSumme);
+                }
+                for(int i = 0; i < aIndex; i++){
+                    tempSumme = times10(tempSumme);
+                }
+                // System.out.print("tempSumme: ");
+                // print(tempSumme);
+                // System.out.println();
+
+                summe = add(summe, tempSumme);
+            }
+        }
+
+        print(a);
+        System.out.print(" * ");
+        print(b);
+        System.out.print(" = ");
+        print(summe);
+
+        return summe;
     }
 
     /**
@@ -329,9 +354,11 @@ public class Bigs {
 
         // System.out.println(equal(a, b));
 
-        int[] from = fromInt(123456798);
-        int[] from2 = fromInt(123456698);
-        System.out.println(mod10(from));
+        // int[] from = fromInt(123456798);
+        // int[] from2 = fromInt(123456698);
+        // System.out.println(mod10(from));
+
+        times(times(fromInt(100000000), fromInt(100000000)), times(fromInt(100000000), fromInt(100000000)));
 
         // int[] a = One();
 
