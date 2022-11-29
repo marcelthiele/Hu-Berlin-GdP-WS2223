@@ -110,7 +110,7 @@ public class Bigs {
      * @return
      */
     static int mod10(int[] n) {
-        return n[0]; 
+        return n[0];
     }
 
     /**
@@ -120,9 +120,9 @@ public class Bigs {
      * @return
      */
     static int[] div10(int[] n) {
-        int[] retArray = new int[n.length -1];
-        for(int i = 0; i < retArray.length; i++){
-            retArray[retArray.length-1-i] = n[n.length-1-i];
+        int[] retArray = new int[n.length - 1];
+        for (int i = 0; i < retArray.length; i++) {
+            retArray[retArray.length - 1 - i] = n[n.length - 1 - i];
         }
 
         // print(n);
@@ -141,18 +141,15 @@ public class Bigs {
     static int[] fromInt(int n) {
         // Quick and dirty
 
-        String nAsString = "" + n;
-        char[] nAsCharArray = nAsString.toCharArray();
+        int[] retArray = new int[n/10];
 
-        int[] retArray = new int[nAsCharArray.length];
-
-        for (int i = 0; i < nAsCharArray.length; i++) {
-            retArray[i] = Integer.parseInt(nAsCharArray[nAsCharArray.length - 1 - i] + "");
+        for (int i = 0; i < n/10; i++) {
+            retArray[i] = n % 10;
+            n = n / 10;
         }
 
         return retArray;
     }
-
 
     /**
      * Kopiert den Wert von n
@@ -210,13 +207,13 @@ public class Bigs {
     static int[] times(int[] a, int[] b) {
 
         int[] summe = Null();
-        for(int aIndex = 0; aIndex < a.length; aIndex++){
-            for(int bIndex = 0; bIndex < b.length; bIndex++){
+        for (int aIndex = 0; aIndex < a.length; aIndex++) {
+            for (int bIndex = 0; bIndex < b.length; bIndex++) {
                 int[] tempSumme = fromInt(a[aIndex] * b[bIndex]); // FIXME could break wenn bIndex sehr gross ist
-                for(int i = 0; i < bIndex; i++){
+                for (int i = 0; i < bIndex; i++) {
                     tempSumme = times10(tempSumme);
                 }
-                for(int i = 0; i < aIndex; i++){
+                for (int i = 0; i < aIndex; i++) {
                     tempSumme = times10(tempSumme);
                 }
                 // System.out.print("tempSumme: ");
@@ -335,6 +332,8 @@ public class Bigs {
         int[] verteilung = new int[10]; // Hier werden die absoluten Haeufigkeiten der ziffern drin gespeichert, Wie oft
                                         // ist 0, wie oft ist 1 usw...
 
+        System.out.println("Getting haufigste nummer");
+
         for (int i = 0; i < n.length; i++) {
             verteilung[n[i]]++;
         }
@@ -349,8 +348,8 @@ public class Bigs {
 
     public static void main(String[] args) {
 
-        int[] a = { 9, 9, 7, 6, 5, 4, 3, 2, 1 };
-        int[] b = { 9, 9, 7, 7, 5, 4, 3, 2, 1 };
+        // int[] a = { 9, 9, 7, 6, 5, 4, 3, 2, 1 };
+        // int[] b = { 9, 9, 7, 7, 5, 4, 3, 2, 1 };
 
         // int[] added = add(a, b);
         // System.out.println();
@@ -366,35 +365,38 @@ public class Bigs {
         // int[] from2 = fromInt(123456698);
         // System.out.println(mod10(from));
 
-        // times(times(fromInt(100000000), fromInt(100000000)), times(fromInt(100000000), fromInt(100000000)));
+        // times(times(fromInt(100000000), fromInt(100000000)),
+        // times(fromInt(100000000), fromInt(100000000)));
 
         // div10(fromInt(10000006));
 
-        // int[] a = One();
+        int[] a = One();
 
-        // for (int i = 0; i < 33222; i++) {
-        // a = times(a, 2);
-        // }
+        for (int i = 0; i < 33222; i++) {
+            a = times(a, 2);
+        }
 
-        // System.out.println("2^33222 hat " + a.length + " Stellen");
-        // print(a);
+        System.out.println("2^33222 hat " + a.length + " Stellen");
+        print(a);
 
-        // System.out.println();
+        System.out.println("-----------------");
 
-        // int[] b = fromInt(13);
-        // int[] c = copy(b);
+        int[] b = fromInt(13);
+        int[] c = copy(b);
 
-        // for (int i = 0; i < 8978; i++) {
-        // c = times(c, b);
-        // }
+        for (int i = 0; i < 8978; i++) {
+            // print(c);
+            System.out.println(" : " + i);
+            c = times(c, b);
+        }
 
-        // System.out.println("13^8978 hat " + c.length + " Stellen");
-        // print(c);
-        // System.out.println();
+        System.out.println("13^8978 hat " + c.length + " Stellen");
+        print(c);
+        System.out.println();
 
-        // System.out.println(less(a, c));
+        System.out.println(less(a, c));
 
-        // maxDigit(a);
-        // maxDigit(c);
+        maxDigit(a);
+        maxDigit(c);
     }
 }
