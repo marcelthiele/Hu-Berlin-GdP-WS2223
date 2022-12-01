@@ -141,11 +141,13 @@ public class Bigs {
     static int[] fromInt(int n) {
         // Quick and dirty
 
-        int[] retArray = new int[n/10];
+        String nAsString = "" + n;
+        char[] nAsCharArray = nAsString.toCharArray();
 
-        for (int i = 0; i < n/10; i++) {
-            retArray[i] = n % 10;
-            n = n / 10;
+        int[] retArray = new int[nAsCharArray.length];
+
+        for (int i = 0; i < nAsCharArray.length; i++) {
+            retArray[i] = Integer.parseInt(nAsCharArray[nAsCharArray.length - 1 - i] + "");
         }
 
         return retArray;
@@ -175,10 +177,21 @@ public class Bigs {
      * @return
      */
     static int[] times(int[] n, int d) {
-        int[] retArray = copy(n);
-        for (int i = 1; i < d; i++) {
-            retArray = add(retArray, n);
+        int[] retArray = n[n.length - 1] * d >= 10 ? new int[n.length + 1] : new int[n.length];
+
+        int imSinn = 0;
+
+        for (int i = 0; i < n.length; i++) {
+            retArray[i] = n[i] * d + imSinn;
+
+            imSinn = retArray[i] / 10;
+            retArray[i] %= 10;
         }
+
+        if (retArray.length > n.length) {
+            retArray[retArray.length - 1] = imSinn;
+        }
+
         return retArray;
     }
 
@@ -207,22 +220,17 @@ public class Bigs {
     static int[] times(int[] a, int[] b) {
 
         int[] summe = Null();
-        for (int aIndex = 0; aIndex < a.length; aIndex++) {
-            for (int bIndex = 0; bIndex < b.length; bIndex++) {
-                int[] tempSumme = fromInt(a[aIndex] * b[bIndex]); // FIXME could break wenn bIndex sehr gross ist
-                for (int i = 0; i < bIndex; i++) {
-                    tempSumme = times10(tempSumme);
-                }
-                for (int i = 0; i < aIndex; i++) {
-                    tempSumme = times10(tempSumme);
-                }
-                // System.out.print("tempSumme: ");
-                // print(tempSumme);
-                // System.out.println();
-
-                summe = add(summe, tempSumme);
+        // for (int aIndex = 0; aIndex < a.length; aIndex++) {
+        for (int bIndex = 0; bIndex < b.length; bIndex++) {
+            int pow10 = 1;
+            for (int j = 0; j < bIndex; j++) {
+                pow10 *= 10;
             }
+            int[] tempSumme = times(a, b[bIndex] * pow10); // FIXME could break wenn bIndex sehr gross ist
+
+            summe = add(summe, tempSumme);
         }
+        // }
 
         // print(a);
         // System.out.print(" * ");
@@ -366,37 +374,35 @@ public class Bigs {
         // System.out.println(mod10(from));
 
         // times(times(fromInt(100000000), fromInt(100000000)),
-        // times(fromInt(100000000), fromInt(100000000)));
+        print(times(fromInt(245223456), 9));
 
         // div10(fromInt(10000006));
 
-        int[] a = One();
+        // int[] a = One();
 
-        for (int i = 0; i < 33222; i++) {
-            a = times(a, 2);
-        }
+        // for (int i = 0; i < 33222; i++) {
+        // a = times(a, 2);
+        // }
 
-        System.out.println("2^33222 hat " + a.length + " Stellen");
-        print(a);
+        // System.out.println("2^33222 hat " + a.length + " Stellen");
+        // print(a);
 
-        System.out.println("-----------------");
+        // System.out.println("-----------------");
 
-        int[] b = fromInt(13);
-        int[] c = copy(b);
+        // int[] b = fromInt(13);
+        // int[] c = copy(b);
 
-        for (int i = 0; i < 8978; i++) {
-            // print(c);
-            System.out.println(" : " + i);
-            c = times(c, b);
-        }
+        // for (int i = 0; i < 8978; i++) {
+        // c = times(c, b);
+        // }
 
-        System.out.println("13^8978 hat " + c.length + " Stellen");
-        print(c);
-        System.out.println();
+        // System.out.println("13^8978 hat " + c.length + " Stellen");
+        // print(c);
+        // System.out.println();
 
-        System.out.println(less(a, c));
+        // System.out.println(less(a, c));
 
-        maxDigit(a);
-        maxDigit(c);
+        // maxDigit(a);
+        // maxDigit(c);
     }
 }
