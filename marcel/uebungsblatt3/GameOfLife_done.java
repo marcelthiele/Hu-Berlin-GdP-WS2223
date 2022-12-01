@@ -22,8 +22,10 @@ public class GameOfLife_done{
     }
 
     private static void initDraw(int x_length, int y_length) {
-        StdDraw.setXscale(0, x_length);
-        StdDraw.setYscale(0, y_length);
+        int length = x_length < y_length ? y_length : x_length;
+
+        StdDraw.setXscale(0, length);
+        StdDraw.setYscale(0, length);
     }
 
     private static boolean[][] initMapOfCells(int x_length, int y_length, int numOfLivingCells) {
@@ -73,14 +75,13 @@ public class GameOfLife_done{
 
         // //Draw Lines
         StdDraw.setPenColor(StdDraw.BLUE);
-        StdDraw.square(0, 0, mapOfCells.length);
-        for(int x = 0; x < mapOfCells.length; x++){
+        for(int x = 0; x <= mapOfCells.length; x++){
             //Vertical lines
-            StdDraw.line(x, -1, x, mapOfCells[0].length);
+            StdDraw.line(x, 0, x, mapOfCells[0].length);
         }
-        for(int y = 0; y < mapOfCells[0].length; y++){
+        for(int y = 0; y <= mapOfCells[0].length; y++){
             //Horizontal lines
-            StdDraw.line(-1, y, mapOfCells.length, y);
+            StdDraw.line(0, y, mapOfCells.length, y);
         }
 
 
