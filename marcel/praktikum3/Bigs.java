@@ -222,21 +222,22 @@ public class Bigs {
         int[] summe = Null();
         // for (int aIndex = 0; aIndex < a.length; aIndex++) {
         for (int bIndex = 0; bIndex < b.length; bIndex++) {
-            int pow10 = 1;
-            for (int j = 0; j < bIndex; j++) {
-                pow10 *= 10;
+
+            int[] tempSumme = times(a, b[bIndex]);
+
+            for(int i = 0; i < bIndex; i++){
+                tempSumme = times10(tempSumme);
             }
-            int[] tempSumme = times(a, b[bIndex] * pow10); // FIXME could break wenn bIndex sehr gross ist
 
             summe = add(summe, tempSumme);
         }
         // }
 
-        // print(a);
-        // System.out.print(" * ");
-        // print(b);
-        // System.out.print(" = ");
-        // print(summe);
+        print(a);
+        System.out.print(" * ");
+        print(b);
+        System.out.print(" = ");
+        print(summe);
 
         return summe;
     }
@@ -374,7 +375,7 @@ public class Bigs {
         // System.out.println(mod10(from));
 
         // times(times(fromInt(100000000), fromInt(100000000)),
-        print(times(fromInt(245223456), 9));
+        // print(times(fromInt(222345456), 9));
 
         // div10(fromInt(10000006));
 
@@ -389,20 +390,21 @@ public class Bigs {
 
         // System.out.println("-----------------");
 
-        // int[] b = fromInt(13);
-        // int[] c = copy(b);
+        int[] b = fromInt(13);
+        int[] c = copy(b);
 
-        // for (int i = 0; i < 8978; i++) {
-        // c = times(c, b);
-        // }
+        for (int i = 0; i < 2; i++) {
+            System.out.println("i: " + i);
+        c = times(c, b);
+        }
 
-        // System.out.println("13^8978 hat " + c.length + " Stellen");
-        // print(c);
-        // System.out.println();
+        System.out.println("13^8978 hat " + c.length + " Stellen");
+        print(c);
+        System.out.println();
 
         // System.out.println(less(a, c));
 
         // maxDigit(a);
-        // maxDigit(c);
+        maxDigit(c);
     }
 }
