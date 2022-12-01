@@ -177,7 +177,7 @@ public class Bigs {
      * @return
      */
     static int[] times(int[] n, int d) {
-        int[] retArray = n[n.length - 1] * d >= 10 ? new int[n.length + 1] : new int[n.length];
+        int[] retArray = new int[n.length + 1];
 
         int imSinn = 0;
 
@@ -188,8 +188,14 @@ public class Bigs {
             retArray[i] %= 10;
         }
 
-        if (retArray.length > n.length) {
-            retArray[retArray.length - 1] = imSinn;
+        retArray[retArray.length - 1] = imSinn;
+
+        if (retArray[retArray.length - 1] == 0) {
+            int[] realRetArray = new int[n.length];
+            for (int i = 0; i < retArray.length - 1; i++) {
+                realRetArray[i] = retArray[i];
+            }
+            retArray = realRetArray;
         }
 
         return retArray;
@@ -225,7 +231,7 @@ public class Bigs {
 
             int[] tempSumme = times(a, b[bIndex]);
 
-            for(int i = 0; i < bIndex; i++){
+            for (int i = 0; i < bIndex; i++) {
                 tempSumme = times10(tempSumme);
             }
 
@@ -233,11 +239,11 @@ public class Bigs {
         }
         // }
 
-        print(a);
-        System.out.print(" * ");
-        print(b);
-        System.out.print(" = ");
-        print(summe);
+        // print(a);
+        // System.out.print(" * ");
+        // print(b);
+        // System.out.print(" = ");
+        // print(summe);
 
         return summe;
     }
@@ -379,32 +385,31 @@ public class Bigs {
 
         // div10(fromInt(10000006));
 
-        // int[] a = One();
+        int[] a = One();
 
-        // for (int i = 0; i < 33222; i++) {
-        // a = times(a, 2);
-        // }
+        for (int i = 0; i < 33222; i++) {
+            a = times(a, 2);
+        }
 
-        // System.out.println("2^33222 hat " + a.length + " Stellen");
-        // print(a);
+        System.out.println("2^33222 hat " + a.length + " Stellen");
+        print(a);
 
-        // System.out.println("-----------------");
+        System.out.println();
 
         int[] b = fromInt(13);
         int[] c = copy(b);
 
-        for (int i = 0; i < 2; i++) {
-            System.out.println("i: " + i);
-        c = times(c, b);
+        for (int i = 1; i < 8978; i++) {
+            c = times(c, b);
         }
 
         System.out.println("13^8978 hat " + c.length + " Stellen");
         print(c);
         System.out.println();
 
-        // System.out.println(less(a, c));
+        System.out.println(less(a, c));
 
-        // maxDigit(a);
+        maxDigit(a);
         maxDigit(c);
     }
 }
