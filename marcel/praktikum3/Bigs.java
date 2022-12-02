@@ -217,6 +217,21 @@ public class Bigs {
     }
 
     /**
+     * Multipliziert die Zahl mit einer Potenz von 10
+     * 
+     * @param n die zu multiplizierende Zahl
+     * @param m der Exponent von 10, mit dem multipliziert werden soll
+     * @return n*10^m
+     */
+    static int[] timesPower10(int[] n, int m) {
+        int[] retInt = new int[n.length + m];
+        for (int i = 0; i < n.length; i++) {
+            retInt[i + m] = n[i];
+        }
+        return retInt;
+    }
+
+    /**
      * multipliziert zwei Ziffernfelder
      * 
      * @param a
@@ -231,9 +246,7 @@ public class Bigs {
 
             int[] tempSumme = times(a, b[bIndex]);
 
-            for (int i = 0; i < bIndex; i++) {
-                tempSumme = times10(tempSumme);
-            }
+            tempSumme = timesPower10(tempSumme, bIndex);
 
             summe = add(summe, tempSumme);
         }
