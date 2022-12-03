@@ -5,18 +5,21 @@ public class Sieb_done {
         int M = Integer.parseInt(args[0]);
         int N = M;
 
-
         int[] primes = findPrimes(M, N);
 
+        printAll(primes);
+    }
+
+    private static void printAll(int[] primes) {
         for (int i = 0; i < primes.length; i++) {
             System.out.println(primes[i]);
         }
     }
 
-    public static int[] findPrimes(int M, int N){
+    public static int[] findPrimes(int M, int N) {
         int[] primes = new int[N];
 
-        for(;;) {
+        for (;;) {
             boolean[] markiert = new boolean[M + 1];
             for (int i = 0; i < markiert.length; i++) {
                 markiert[i] = false;
