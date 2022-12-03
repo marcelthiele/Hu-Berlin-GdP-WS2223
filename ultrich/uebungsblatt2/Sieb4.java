@@ -1,13 +1,13 @@
 public class Sieb4 {
 	public static boolean[] groesser(boolean[] p) {
-		boolean[] newp = new boolean[p.length + 10];
+		boolean[] newp = new boolean[p.length * 10];
+		for (int j = 0; j < newp.length; j++) {
+			newp[j] = true;
+
+		}
 		for (int i = 2; i < p.length; i++) {
 
 			newp[i] = p[i];
-		}
-		for (int j = p.length - 9; j < p.length; j++) {
-			newp[j] = true;
-
 		}
 
 		return newp;
@@ -22,6 +22,7 @@ public class Sieb4 {
 			p[i] = true;
 		}
 
+		System.out.println("in main");
 		while (anzahl < N) {
 			for (i = 2; i * i < p.length; i++) {
 
@@ -33,8 +34,7 @@ public class Sieb4 {
 				}
 			}
 			if (anzahl < N) {
-				anzahl = 0;
-				groesser(p);
+				p = groesser(p);
 			}
 		}
 		anzahl = 0;
