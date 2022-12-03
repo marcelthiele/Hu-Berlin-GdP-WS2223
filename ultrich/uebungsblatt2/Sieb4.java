@@ -5,7 +5,7 @@ public class Sieb4 {
 			newp[j] = true;
 
 		}
-		for (int i = 2; i < p.length; i++) {
+		for (int i = 2; i < p.length && i < newp.length; i++) {
 
 			newp[i] = p[i];
 		}
@@ -22,9 +22,8 @@ public class Sieb4 {
 			p[i] = true;
 		}
 
-		System.out.println("in main");
 		while (anzahl < N) {
-			for (i = 2; i * i < p.length; i++) {
+			for (i = 2; i < p.length; i++) {
 
 				if (p[i]) {
 					anzahl++;
@@ -40,7 +39,7 @@ public class Sieb4 {
 		anzahl = 0;
 		for (i = 2; i < p.length; i++) {
 			if (p[i]) {
-				System.out.println(i + " is prime");
+				System.out.println(i);
 				anzahl++;
 				if (anzahl == N) {
 					System.exit(-1);
