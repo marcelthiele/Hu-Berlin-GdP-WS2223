@@ -18,7 +18,7 @@ public class Sieb {
 		boolean[] p = new boolean[9];
 		int anzahl = 0;
 
-		for (i = 2; i < p.length; i++) {
+		for (int i = 2; i < p.length; i++) {
 			p[i] = true;
 		}
 
