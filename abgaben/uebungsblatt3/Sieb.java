@@ -14,12 +14,16 @@ public class Sieb {
 	}
 
 	public static void main(String[] args) {
+		if(args==0){
+			System.out.println("Bitte geben Sie eine Zahl ein");
+			System.exit(-1);
+		}
 		int N = Integer.parseInt(args[0]);
 		if(N<1){
 			if(N==0){
 				System.out.println("keine Prime Zahl für Eingabe 0");
 			}
-			System.out.println("Biite geben Sie eine positive ganze Zahl ein.");
+			System.out.println("Bitte geben Sie eine positive ganze Zahl ein.");
 			System.exit(-1);
 		}
 		boolean[] p = new boolean[9];
