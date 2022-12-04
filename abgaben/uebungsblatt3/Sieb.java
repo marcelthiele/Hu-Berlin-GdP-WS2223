@@ -14,7 +14,7 @@ public class Sieb {
 	}
 
 	public static void main(String[] args) {
-		if(args==0){
+		if(args.length==0){
 			System.out.println("Bitte geben Sie eine Zahl ein.");
 			System.exit(-1);
 		}
