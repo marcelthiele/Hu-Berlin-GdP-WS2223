@@ -66,9 +66,11 @@ public class Bigs {
 
         for (int i = n.length - 1; i >= 0; i--) {
             printString += n[i];
+            if((n.length-i) % 68 == 0)
+                printString += "\\\n";
         }
 
-        // TODO lange zahlen. siehe oben
+
 
         System.out.print(printString + "\n");
     }
