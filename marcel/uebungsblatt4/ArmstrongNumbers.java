@@ -1,5 +1,8 @@
 package marcel.uebungsblatt4;
-
+/**
+ * @author @marcelthiele
+ * @version 0.1
+ */
 public class ArmstrongNumbers {
     public static void main(String[] args) {
         try {
