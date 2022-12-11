@@ -303,9 +303,8 @@ public class Bigs {
             return a.length < b.length;
         }
 
-        boolean soFarEqual = true;
-        for (int i = 0; i < a.length; i++) {
-            if (a[i] < b[i] && soFarEqual)
+        for (int i = a.length - 1; i >= 0; i--) {
+            if (a[i] < b[i])
                 return true;
         }
 
