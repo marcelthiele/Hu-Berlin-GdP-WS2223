@@ -15,7 +15,7 @@ public class Bigs {
         int[] retArray = new int[biggerArrayLength + 1]; // Eine Stelle mehr, falls die beiden vorletzten Ziffern aus a
                                                          // und b mehr als 10 ergeben
 
-        int imSinn = 0;
+        int rollover = 0;
         for (int i = 0; i < biggerArrayLength; i++) {
             int currentA = 0;
             int currentB = 0;
@@ -24,16 +24,16 @@ public class Bigs {
             if (i < b.length)
                 currentB = b[i];
 
-            int currentSum = currentA + currentB + imSinn;
-            imSinn = currentSum / 10;
+            int currentSum = currentA + currentB + rollover;
+            rollover = currentSum / 10;
             currentSum = currentSum % 10;
             retArray[i] = currentSum;
 
         }
-        if (imSinn > 0)
-            retArray[retArray.length - 1] = imSinn;
+        if (rollover > 0)
+            retArray[retArray.length - 1] = rollover;
 
-        if (imSinn == 0) {
+        if (rollover == 0) {
             // Remove "leading Zero"
             int[] trueRetArray = new int[retArray.length - 1];
 
@@ -181,16 +181,16 @@ public class Bigs {
     static int[] times(int[] n, int d) {
         int[] retArray = new int[n.length + 1];
 
-        int imSinn = 0;
+        int rollover = 0;
 
         for (int i = 0; i < n.length; i++) {
-            retArray[i] = n[i] * d + imSinn;
+            retArray[i] = n[i] * d + rollover;
 
-            imSinn = retArray[i] / 10;
+            rollover = retArray[i] / 10;
             retArray[i] %= 10;
         }
 
-        retArray[retArray.length - 1] = imSinn;
+        retArray[retArray.length - 1] = rollover;
 
         if (retArray[retArray.length - 1] == 0) {
             int[] realRetArray = new int[n.length];
