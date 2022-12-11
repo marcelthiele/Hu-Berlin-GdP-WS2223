@@ -362,47 +362,23 @@ public class Bigs {
      * @param n
      */
     static void maxDigit(int[] n) {
-        int[] verteilung = new int[10]; // Hier werden die absoluten Haeufigkeiten der ziffern drin gespeichert, Wie oft
+        int[] distribution = new int[10]; // Hier werden die absoluten Haeufigkeiten der ziffern drin gespeichert, Wie oft
                                         // ist 0, wie oft ist 1 usw...
 
-        System.out.println("Getting haufigste nummer");
-
         for (int i = 0; i < n.length; i++) {
-            verteilung[n[i]]++;
+            distribution[n[i]]++;
         }
 
-        int currentlyHaeufigstes = 0;
-        for (int j = 0; j < verteilung.length; j++) {
-            if (verteilung[j] > verteilung[currentlyHaeufigstes])
-                currentlyHaeufigstes = j;
+        int currentMax = 0;
+        for (int j = 0; j < distribution.length; j++) {
+            if (distribution[j] > distribution[currentMax])
+                currentMax = j;
         }
-        System.out.println("Häufigste Ziffer ist: " + currentlyHaeufigstes);
+        // System.out.println("Haeufigste Ziffer ist: " + currentMax);
+        System.out.println(currentMax);
     }
 
     public static void main(String[] args) {
-
-        // int[] a = { 9, 9, 7, 6, 5, 4, 3, 2, 1 };
-        // int[] b = { 9, 9, 7, 7, 5, 4, 3, 2, 1 };
-
-        // int[] added = add(a, b);
-        // System.out.println();
-        // System.out.println("Added:");
-        // print(added);
-
-        // maxDigit(a);
-        // maxDigit(b);
-
-        // System.out.println(equal(a, b));
-
-        // int[] from = fromInt(123456798);
-        // int[] from2 = fromInt(123456698);
-        // System.out.println(mod10(from));
-
-        // times(times(fromInt(100000000), fromInt(100000000)),
-        // print(times(fromInt(222345456), 9));
-
-        // div10(fromInt(10000006));
-
         int[] a = One();
 
         for (int i = 0; i < 33222; i++) {
