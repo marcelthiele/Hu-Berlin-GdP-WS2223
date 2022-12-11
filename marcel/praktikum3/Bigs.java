@@ -124,7 +124,7 @@ public class Bigs {
     static int[] div10(int[] n) {
         int[] retArray = new int[n.length - 1];
         for (int i = 0; i < retArray.length; i++) {
-            retArray[retArray.length - 1 - i] = n[n.length - 1 - i];
+            retArray[i] = n[i + 1];
         }
 
         // print(n);
@@ -141,15 +141,19 @@ public class Bigs {
      * @return
      */
     static int[] fromInt(int n) {
-        // Quick and dirty
+        int retArraySize = 0;
+        int copyOfN = n;
 
-        String nAsString = "" + n;
-        char[] nAsCharArray = nAsString.toCharArray();
+        while(copyOfN > 0){
+            copyOfN /= 10;
+            retArraySize++;
+        }
 
-        int[] retArray = new int[nAsCharArray.length];
+        int[] retArray = new int[retArraySize];
 
-        for (int i = 0; i < nAsCharArray.length; i++) {
-            retArray[i] = Integer.parseInt(nAsCharArray[nAsCharArray.length - 1 - i] + "");
+        for(int i = 0; i < retArraySize; i++){
+            retArray[i] = n % 10;
+            n /= 10;
         }
 
         return retArray;
