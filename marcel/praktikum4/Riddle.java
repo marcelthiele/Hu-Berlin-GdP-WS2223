@@ -14,10 +14,14 @@ public class Riddle {
         if (n > 15)
             System.out.println("Bitte eine Zahl kleiner als 15 eingeben");
 
-        riddle(n, new int[2 * n], 0);
+        riddle(n, new int[2 * n]);
+        if(numOfSolutions > 0)
+            System.out.println(numOfSolutions/2 + " Loesungen");
+            else
+            System.out.println("keine Loesung");
     }
 
-    public static void riddle(int currentN, int[] prevArray, int currentNumOfSolutions) {
+    public static boolean riddle(int currentN, int[] prevArray) {
         if (currentN < 1) {
             // Print array, hat geklappt
             String printString = "";
@@ -25,7 +29,10 @@ public class Riddle {
                 printString += prevArray[i];
             }
             System.out.println(printString);
-            return;
+
+            numOfSolutions++; //TODO das hier in der Rekursion speichern, nicht extern
+
+            return true;
         }
 
         for (int i = 0; i < prevArray.length - currentN - 1; i++) {
@@ -34,9 +41,13 @@ public class Riddle {
                 currentArray[i] = currentN;
                 currentArray[i + currentN + 1] = currentN;
 
-                riddle(currentN - 1, currentArray, currentNumOfSolutions);
+                riddle(currentN - 1, currentArray);
+                // if(riddle(currentN - 1, currentArray))
+                    // return true;
             }
         }
+
+        return false;
     }
 
     public static int[] copy(int[] prevArray) {
