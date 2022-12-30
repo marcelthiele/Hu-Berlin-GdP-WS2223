@@ -21,6 +21,9 @@ public class Riddle {
             System.out.println("keine Loesung");
     }
 
+    //TODO es werden auch doppelte lösungen geprintet
+    //Idee: Da nach numOfSolutions/2 prints, die Lösungen reversed und wieder angezeigt werden, muss man also irgendwie den Zeitpunkt feststellen, wo die prevLösung.reverse() == aktuelleLösung ist und dann abbrechen
+
     public static boolean riddle(int currentN, int[] prevArray) {
         if (currentN < 1) {
             // Print array, hat geklappt
