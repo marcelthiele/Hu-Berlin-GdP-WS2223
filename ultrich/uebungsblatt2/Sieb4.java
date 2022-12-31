@@ -34,6 +34,7 @@ public class Sieb4 {
 			}
 			if (anzahl < N) {
 				p = groesser(p);
+				anzahl=0;
 			}
 		}
 		anzahl = 0;
