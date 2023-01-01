@@ -63,7 +63,7 @@ public class Aufgabe1 {
 		// ob die Aussage richtig (true)
 		// oder falsch (false) ist.
 		boolean a = false; // Aussage A
-		boolean b = true; // Aussage B
+		boolean b = false; // Aussage B
 		boolean c = true; // Aussage C
 		boolean d = true; // Aussage D
 		boolean e = false; // Aussage E
