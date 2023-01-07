@@ -22,7 +22,7 @@ public class Roman {
 	 }
 	int N=Integer.parseInt(args[0]) ,i=0;
 	String RomanN="";
-	 if(N<1) {
+	 if(N<1||N>5000) {
 		 System.out.println("Die Zahl muss zwischen 1 und 5000 liegen.");
 		 System.exit(-1);
 	 }
