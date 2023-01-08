@@ -15,38 +15,43 @@ public class Riddle {
             System.out.println("Bitte eine Zahl kleiner als 15 eingeben");
 
         riddle(n, new int[2 * n]);
-        if(numOfSolutions > 0)
-            System.out.println(numOfSolutions/2 + " Loesungen");
-            else
+        if (numOfSolutions > 0)
+            System.out.println(numOfSolutions + " Loesungen");
+        else
             System.out.println("keine Loesung");
     }
 
-    //TODO es werden auch doppelte lösungen geprintet
-    //Idee: Da nach numOfSolutions/2 prints, die Lösungen reversed und wieder angezeigt werden, muss man also irgendwie den Zeitpunkt feststellen, wo die prevLösung.reverse() == aktuelleLösung ist und dann abbrechen
+    // TODO es werden auch doppelte lösungen geprintet
+    // Idee: Da nach numOfSolutions/2 prints, die Lösungen reversed und wieder
+    // angezeigt werden, muss man also irgendwie den Zeitpunkt feststellen, wo die
+    // prevLösung.reverse() == aktuelleLösung ist und dann abbrechen
 
     public static boolean riddle(int currentN, int[] prevArray) {
+        // printArray(prevArray);
         if (currentN < 1) {
             // Print array, hat geklappt
-            String printString = "";
-            for (int i = 0; i < prevArray.length; i++) {
-                printString += prevArray[i];
-            }
-            System.out.println(printString);
+            // System.out.println(currentN);
+            printArray(prevArray);
 
-            numOfSolutions++; //TODO das hier in der Rekursion speichern, nicht extern
+            numOfSolutions++; // TODO das hier in der Rekursion speichern, nicht extern
 
             return true;
         }
 
-        for (int i = 0; i < prevArray.length - currentN - 1; i++) {
+        int grenze = prevArray.length - currentN - 1;
+        if (currentN == prevArray.length / 2)
+            grenze = currentN/2;
+            
+        for (int i = 0; i < grenze; i++) {
             int[] currentArray = copy(prevArray);
             if (currentArray[i] == 0 && currentArray[i + currentN + 1] == 0) {
                 currentArray[i] = currentN;
                 currentArray[i + currentN + 1] = currentN;
+                // printArray(currentArray);
 
                 riddle(currentN - 1, currentArray);
                 // if(riddle(currentN - 1, currentArray))
-                    // return true;
+                // return true;
             }
         }
 
@@ -61,6 +66,14 @@ public class Riddle {
         }
 
         return retArray;
+    }
+
+    public static void printArray(int[] arrayToPrint) {
+        String printString = "";
+        for (int i = 0; i < arrayToPrint.length; i++) {
+            printString += arrayToPrint[i];
+        }
+        System.out.println(printString);
     }
 
 }
