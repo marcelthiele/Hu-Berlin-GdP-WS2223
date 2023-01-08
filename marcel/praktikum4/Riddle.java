@@ -31,10 +31,8 @@ public class Riddle {
     }
 
     public static void riddle(int currentN, int[] prevArray) {
-        // printArray(prevArray);
         if (currentN < 1) {
             // Print array, hat geklappt
-            // System.out.println(currentN);
             if (prevArray.length / 2 < 10)
                 printArray(prevArray);
 
@@ -47,9 +45,9 @@ public class Riddle {
 
         for (int i = 0; i < threshold; i++) {
             int[] currentArray = copyArray(prevArray);
-            if (currentArray[i] == 0 && currentArray[i + currentN + 1] == 0) {
-                currentArray[i] = currentN;
-                currentArray[i + currentN + 1] = currentN;
+            if (currentArray[prevArray.length - 1 - i] == 0 && currentArray[prevArray.length - 1 - (i + currentN + 1)] == 0) {
+                currentArray[prevArray.length - 1 - i] = currentN;
+                currentArray[prevArray.length - 1 - (i + currentN + 1)] = currentN;
 
                 riddle(currentN - 1, currentArray);
             }
