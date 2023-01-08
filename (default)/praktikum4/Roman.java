@@ -1,28 +1,11 @@
 public class Roman {
 
-    public static void main(String[] args) {
-        if(args.length == 0) return;
-        int n = 0;
-        try {
-            n = Integer.parseInt(args[0]);
-        } catch (Exception e) {
-            System.out.println("Bitte eine Zahl aus lateinischen Ziffern eigeben");
-        }
-
-        if(n < 1 || n > 5000){
-            System.out.println("Bitte eine Zahl zwischen 1 und 5000 eingeben");
-        }
-
-        System.out.println(roman(n));
-
-    }
-
     public static String roman(int n) {
         if (n < 1)
             return "";
 
-        int[] integerValues = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 5, 4, 1 };
-        String[] romanValues = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "V", "IV", "I" };
+        int[] integerValues = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+        String[] romanValues = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
 
         String retString = "";
 
@@ -32,6 +15,22 @@ public class Roman {
         }
 
         return ""; // ERROR - should not be reached
+    }
+    
+    public static void main(String[] args) {
+        if(args.length == 0){
+             System.out.println("Bitte eine Zahl als Parameter angeben.");
+        }
+       
+        int  N = Integer.parseInt(args[0]);
+
+        if(N < 1 || N > 5000){
+            System.out.println("Die Zahl muss zwischen 1 und 5000 liegen.");
+            System.out.exit(-1);
+        }
+        assert(1<=N && N<=5000);
+        System.out.println(roman(N));
+
     }
 
 }
