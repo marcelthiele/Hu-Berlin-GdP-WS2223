@@ -53,7 +53,7 @@ public class  Riddle {
     return count;
     
   }
-      
+      //ab hier ist es nicht mehr so geil
       public static boolean isPossible(int []field, int pos, int i,int n) {
     	  if(pos+i+1<2*n) {
     		  if(field[pos]!=0||field[pos+i+1]!=0) {
