@@ -20,13 +20,14 @@ public class Roman {
     public static void main(String[] args) {
         if(args.length == 0){
              System.out.println("Bitte eine Zahl als Parameter angeben.");
+            System.exit(-1);
         }
        
         int  N = Integer.parseInt(args[0]);
 
         if(N < 1 || N > 5000){
             System.out.println("Die Zahl muss zwischen 1 und 5000 liegen.");
-            System.out.exit(-1);
+            System.exit(-1);
         }
         assert(1<=N && N<=5000);
         System.out.println(roman(N));
