@@ -2,12 +2,21 @@ package marcel.praktikum4;
 
 public class Roman {
 
-    //TODO Error handling wenn eingabe größer als 5000, kleiner 1, keine eingabe
-
     public static void main(String[] args) {
-        for(int i = 1; i <= 5000; i++){
-            System.out.println(i + ": " + roman(i));
+        if(args.length == 0) return;
+        int n = 0;
+        try {
+            n = Integer.parseInt(args[0]);
+        } catch (Exception e) {
+            System.out.println("Bitte eine Zahl aus lateinischen Ziffern eigeben");
         }
+
+        if(n < 1 || n > 5000){
+            System.out.println("Bitte eine Zahl zwischen 1 und 5000 eingeben");
+        }
+
+        System.out.println(roman(n));
+
     }
 
     public static String roman(int n) {
