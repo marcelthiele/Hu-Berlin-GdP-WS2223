@@ -4,18 +4,35 @@ import gdp.stdlib.StdDraw;
 
 public class MazeSolver {
     public static void main(String[] args) {
-        int[][] maze = { { 0, 0, 1, 1, 1, 1, 1, 2 },
+        int[][] maze = {
+                { 0, 0, 1, 1, 1, 1, 1, 2 },
                 { 0, 0, 1, 0, 0, 0, 1, 0 },
                 { 0, 0, 1, 0, 0, 0, 1, 0 },
                 { 0, 0, 0, 0, 1, 1, 1, 0 },
                 { 1, 1, 1, 1, 1, 0, 1, 0 },
                 { 1, 0, 1, 0, 1, 0, 1, 0 },
-                { 0, 0, 1, 0, 1, 0, 0, 0 },
-                { 3, 1, 1, 0, 0, 0, 0, 0 } };
+                { 1, 0, 1, 0, 1, 0, 0, 0 },
+                { 3, 1, 0, 0, 0, 0, 0, 0 }
+        };
 
         initDraw(maze);
         draw(maze);
-        solve(maze, 0, 7);
+        if (solve(maze, 0, maze.length - 1))
+            drawFinish(maze);
+    }
+
+    private static void drawFinish(int[][] maze) {
+        java.awt.Color[] colors = {StdDraw.BLUE, StdDraw.GREEN, StdDraw.MAGENTA, StdDraw.PINK, StdDraw.RED};
+        for (int i = 0; i < 1000; i++) {
+            java.awt.Color currentColor = colors[i % colors.length];
+            StdDraw.setPenColor(currentColor);
+            StdDraw.filledSquare(0, 0, maze.length);
+            StdDraw.show(75);
+            StdDraw.clear();
+            StdDraw.text(maze.length/2, maze.length/2, "Wer das liest ist doof!!");
+            StdDraw.show(50);
+            // draw(maze);
+        }
     }
 
     public static void initDraw(int[][] maze) {
@@ -30,22 +47,24 @@ public class MazeSolver {
             return false;
         if (maze[row][col] == 0)
             return false;
-        if (maze[row][col] == 3)
+        if (maze[row][col] == 3) {
             return true;
-
-        maze[row][col] = 2;
-
-        draw(maze);
-
-        if (!solve(maze, row, col - 1)) {
-            if (!solve(maze, row + 1, col)) {
-                maze[row][col] = 1;
-                return false;
-            } else
-                return true;
         }
 
-        return true;
+        maze[row][col] = 2;
+        draw(maze);
+
+        if (solve(maze, row, col - 1)) {
+            return true;
+        } else {
+            if (solve(maze, row + 1, col)) {
+                return true;
+            } else {
+                maze[row][col] = 1;
+                draw(maze);
+                return false;
+            }
+        }
     }
 
     public static void draw(int[][] maze) {
@@ -71,6 +90,6 @@ public class MazeSolver {
             }
         }
 
-        StdDraw.show(500);
+        StdDraw.show(200);
     }
 }
