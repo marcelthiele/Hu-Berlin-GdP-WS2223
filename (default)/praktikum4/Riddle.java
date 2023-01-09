@@ -9,12 +9,8 @@ public class Riddle {
         }
 
         int n = Integer.parseInt(args[0]);
-        if (n < 1) {
-            System.out.println("Bitte eine Zahl größer 0 eingeben");
-            System.exit(1);
-        }
-        if (n > 15) {
-            System.out.println("Bitte eine Zahl kleiner als 15 eingeben");
+        if (n < 1||n>15) {
+            System.out.println("Bitte eine Zahl zwischen 1 und 15  eingeben");
             System.exit(1);
         }
 
@@ -32,7 +28,7 @@ public class Riddle {
         if (currentN < 1) {
             // Print array, hat geklappt
             if (prevArray.length / 2 < 10)
-                printArray(prevArray);
+                printArray(compareArray(prevArray));
 
             numOfSolutions++; // TODO das hier in der Rekursion speichern, nicht extern
         }
@@ -60,6 +56,16 @@ public class Riddle {
         }
 
         return retArray;
+    }
+    public static int[] compareArray(int[] arrayToCompare){
+        int []arrayR=new int[arrayToCompare.length];
+        for(int i=0;i<arrayToCompare.length;i++){
+            arrayR[i]=arrayToCompare[arrayToCompare.length-1-i];
+        }
+        if(arryR[0]>=arrayToCompare[0]){
+            return arrayToCompare;
+        }
+            return arrayR;
     }
 
     public static void printArray(int[] arrayToPrint) {
