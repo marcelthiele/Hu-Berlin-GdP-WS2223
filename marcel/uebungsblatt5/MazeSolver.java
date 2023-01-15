@@ -3,15 +3,14 @@ import gdp.stdlib.StdDraw;
 public class MazeSolver {
     public static void main(String[] args) {
         int[][] maze = {
-                { 0, 0, 1, 1, 1, 1, 1, 2 },
-                { 0, 0, 1, 0, 1, 0, 0, 0 },
-                { 0, 0, 1, 0, 1, 0, 0, 0 },
-                { 0, 0, 0, 0, 1, 1, 1, 0 },
-                { 1, 1, 1, 1, 1, 1, 0, 0 },
-                { 1, 0, 1, 0, 1, 1, 0, 0 },
-                { 0, 0, 1, 0, 0, 1, 0, 0 },
-                { 3, 1, 1, 0, 0, 0, 0, 0 }
-        };
+            {1,1,1, 1, 1, 1, 2},
+            {0,1,0, 0, 1, 0, 0},
+            {0,1,0, 1, 1, 1, 1},
+            {1,1,1, 1, 0, 0, 0},
+            {0,0,1, 0, 1, 1, 0},
+            {0,1,1, 1, 1, 1, 1},
+            {3,1,0, 1, 1, 1, 1}
+            };
 
         initDraw(maze);
         draw(maze);
@@ -40,30 +39,35 @@ public class MazeSolver {
     }
 
     public static boolean solve(int[][] maze, int row, int col) {
-        if (col < 0)
+        if (col < 0) // Läuft nach links aus dem Feld
             return false;
-        if (row > maze.length)
+        if (row > maze.length) // Läuft nach unten aus dem Feld
             return false;
-        if (maze[row][col] == 0)
+        if (maze[row][col] == 0) // Läuft gegen eine Wand
             return false;
-        if (maze[row][col] == 3) {
+        
+        if (maze[row][col] == 3) // Ziel erreicht
             return true;
-        }
 
+        //Setze aktuelles Feld auf grün
         maze[row][col] = 2;
-        draw(maze);
+        draw(maze); // Und zeichne neu
 
+        //Teste weg nach links (eine Rekursionsstufe tiefer)
         if (solve(maze, row, col - 1)) {
+            //Falls ein Weg von der tieferen Rekursionsstufe gefunden wurde, ist auch die aktuelle Stufe auf dem "Lösungsweg"
             return true;
         }
 
+        // Falls die aktuelle Rekursionsstufe kein "Lösungsweg war", teste noch den Weg nach unten
         if (solve(maze, row + 1, col)) {
+            //Falls ein Weg nach unten gefunden wurde, ist auch diese Stufe ein "Lösungsweg"
             return true;
         }
 
-        maze[row][col] = 1;
-        draw(maze);
-        return false;
+        maze[row][col] = 1; //In allen anderen Fällen, setze das Feld wieder auf seinen Ausgangszustand zurück
+        // draw(maze); // Neu Zeichnen, damit "die Schlange sich zurückzieht"
+        return false; // Dieser weg ist kein "Lösungsweg"
     }
 
     public static void draw(int[][] maze) {
