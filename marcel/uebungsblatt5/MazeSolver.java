@@ -15,8 +15,9 @@ public class MazeSolver {
 
         initDraw(maze);
         draw(maze);
-        if (solve(maze, 0, maze.length - 1))
-            drawFinish(maze);
+        // if (solve(maze, 0, maze.length - 1))
+        //     drawFinish(maze);
+        solve(maze, 0, maze.length - 1);
     }
 
     private static void drawFinish(int[][] maze) {
@@ -27,7 +28,7 @@ public class MazeSolver {
             StdDraw.filledSquare(0, 0, maze.length);
             StdDraw.show(75);
             StdDraw.clear();
-            StdDraw.text(maze.length / 2, maze.length / 2, "Wer das liest ist doof!!");
+            StdDraw.text(maze.length / 2, maze.length / 2, "Funktioniert!");
             StdDraw.show(50);
             // draw(maze);
         }
@@ -71,8 +72,6 @@ public class MazeSolver {
             for (int y = 0; y < maze[0].length; y++) {
                 double drawX = (x + .5);
                 double drawY = maze.length - (y + .5);
-                StdDraw.setPenColor(StdDraw.BLACK);
-                StdDraw.square(drawX, drawY, .5);
                 if (maze[y][x] == 2) {
                     StdDraw.setPenColor(StdDraw.GREEN);
                     StdDraw.filledSquare(drawX, drawY, .5);
@@ -82,9 +81,11 @@ public class MazeSolver {
                     StdDraw.filledSquare(drawX, drawY, .5);
                 }
                 if (maze[y][x] == 0) {
-                    StdDraw.setPenColor(StdDraw.BLACK);
+                    StdDraw.setPenColor(StdDraw.GRAY);
                     StdDraw.filledSquare(drawX, drawY, .5);
                 }
+                StdDraw.setPenColor(StdDraw.BLACK);
+                StdDraw.square(drawX, drawY, .5);
             }
         }
 
