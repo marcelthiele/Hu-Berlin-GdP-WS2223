@@ -1,4 +1,4 @@
-public class GrayCodes {
+public class Gray {
     public static void main(String[] args) {
         System.out.println(toGray(Integer.parseInt(args[0])));
 
