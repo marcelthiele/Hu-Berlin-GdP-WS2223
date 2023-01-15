@@ -1,5 +1,3 @@
-package marcel.uebungsblatt5;
-
 import gdp.stdlib.StdDraw;
 
 public class MazeSolver {
