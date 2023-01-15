@@ -41,7 +41,7 @@ public class MazeSolver {
     public static boolean solve(int[][] maze, int row, int col) {
         if (col < 0) // Läuft nach links aus dem Feld
             return false;
-        if (row > maze.length) // Läuft nach unten aus dem Feld
+        if (row >= maze.length) // Läuft nach unten aus dem Feld
             return false;
         if (maze[row][col] == 0) // Läuft gegen eine Wand
             return false;
