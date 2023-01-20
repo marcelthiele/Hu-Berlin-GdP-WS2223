@@ -5,7 +5,10 @@ import gdp.stdlib.StdIn;
 public class Oktadoku {
     public enum Variante {
         normal, mitDiagonalen
-    };
+    }
+
+    private static final int NUMOFCELLSPERROWBLOCK = 4;
+    private static final int NUMOFCELLSPERCOLBLOCK = 2;
 
     private Variante v;
     // was sonst noch noetig ist …
@@ -27,11 +30,11 @@ public class Oktadoku {
 
     public void write() {
         for (int y = 0; y < puzzle[0].length; y++) {
-            if (y % 4 == 0) {
+            if (y % NUMOFCELLSPERROWBLOCK == 0) {
                 System.out.println("+-----+-----+-----+-----+");
             }
             for (int x = 0; x < puzzle.length; x++) {
-                if (x % 2 == 0) {
+                if (x % NUMOFCELLSPERCOLBLOCK == 0) {
                     System.out.print("| ");
                 }
                 System.out.print(puzzle[x][y] + " ");
@@ -77,6 +80,28 @@ public class Oktadoku {
     }
 
     public boolean checkBlocks() {
+        for (int rowBlockIndex = 0; rowBlockIndex < puzzle[0].length / NUMOFCELLSPERROWBLOCK; rowBlockIndex++) {
+            for (int colBlockIndex = 0; colBlockIndex < puzzle.length / NUMOFCELLSPERCOLBLOCK; colBlockIndex++) {
+                if (!checkBlock(rowBlockIndex, colBlockIndex))
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkBlock(int rowBlockIndex, int colBlockIndex) {
+        BitSet numberWasInBlock = new BitSet(); // TODO hier einen besseren namen
+        for (int rowInBlockIndex = 0; rowInBlockIndex < NUMOFCELLSPERROWBLOCK; rowInBlockIndex++) {
+            for (int colInBlockIndex = 0; colInBlockIndex < NUMOFCELLSPERCOLBLOCK; colInBlockIndex++) {
+                int col = colBlockIndex * NUMOFCELLSPERCOLBLOCK + colInBlockIndex;
+                int row = rowBlockIndex * NUMOFCELLSPERROWBLOCK + rowInBlockIndex;
+
+                int currentNumber = puzzle[col][row] != ' ' ? Integer.parseInt(puzzle[col][row] + "") : 0;
+                if (numberWasInBlock.get(currentNumber) == true && currentNumber != 0)
+                    return false;
+                numberWasInBlock.set(currentNumber, true);
+            }
+        }
         return true;
     }
 
