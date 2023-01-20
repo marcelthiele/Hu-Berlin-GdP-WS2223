@@ -35,7 +35,8 @@ public class Oktadoku {
 
     private void writeSpecific(char[][] currentPuzzle) {
         System.out.print("Oktadoku");
-        if(v == Variante.mitDiagonalen) System.out.print(" mit Diagonalen");
+        if (v == Variante.mitDiagonalen)
+            System.out.print(" mit Diagonalen");
         System.out.print("\n");
         for (int y = 0; y < currentPuzzle[0].length; y++) {
             if (y % NUMOFCELLSPERROWBLOCK == 0) {
@@ -116,10 +117,12 @@ public class Oktadoku {
     }
 
     public boolean checkSpecificPuzzle(char[][] currentPuzzle) {
-        boolean retCheck = checkRows(currentPuzzle) && checkColumns(currentPuzzle) && checkBlocks(currentPuzzle);
+        boolean retCheck = checkRows(currentPuzzle) && checkColumns(currentPuzzle) &&
+                checkBlocks(currentPuzzle);
         if (this.v == Variante.mitDiagonalen)
             retCheck = retCheck && checkDiagonals(currentPuzzle);
         return retCheck;
+        // return checkDiagonals(currentPuzzle);
     }
 
     public boolean checkRows(char[][] currentPuzzle) {
@@ -175,7 +178,31 @@ public class Oktadoku {
     }
 
     private boolean checkDiagonals(char[][] currentPuzzle) {
-        return false;
+        // Left to Right
+
+        BitSet numberWasInLeftToRight = new BitSet(); // TODO hier einen besseren namen
+        for (int d = 0; d < currentPuzzle.length; d++) {
+
+            int currentNumber = currentPuzzle[d][d] != ' ' ? Integer.parseInt(currentPuzzle[d][d] + "") : 0;
+            if (numberWasInLeftToRight.get(currentNumber) == true && currentNumber != 0)
+                return false;
+            numberWasInLeftToRight.set(currentNumber, true);
+
+        }
+
+        // Right to Left
+        BitSet numberWasInRightToLeft = new BitSet(); // TODO hier einen besseren namen
+        for (int d = 0; d < currentPuzzle.length; d++) {
+
+            int currentNumber = currentPuzzle[currentPuzzle.length - 1 - d][d] != ' '
+                    ? Integer.parseInt(currentPuzzle[currentPuzzle.length - 1 - d][d] + "")
+                    : 0;
+            if (numberWasInRightToLeft.get(currentNumber) == true && currentNumber != 0)
+                return false;
+            numberWasInRightToLeft.set(currentNumber, true);
+
+        }
+        return true;
     }
 
 }
