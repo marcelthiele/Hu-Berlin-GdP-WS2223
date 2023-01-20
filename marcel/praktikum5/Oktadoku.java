@@ -25,7 +25,7 @@ public class Oktadoku {
 
     public void write() {
         for (int y = 0; y < puzzle[0].length; y++) {
-            if (y % 2 == 0) {
+            if (y % 4 == 0) {
                 System.out.println("+-----+-----+-----+-----+");
             }
             for (int x = 0; x < puzzle.length; x++) {
