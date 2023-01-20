@@ -1,4 +1,4 @@
-package marcel.praktikum5;
+
 
 class testOktadoku {
 	public static void main (String args []) {

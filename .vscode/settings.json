@@ -2,5 +2,10 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "gdp_stdlib.jar"
+    ],
+    "java.project.sourcePaths": [
+        "(default)",
+        "marcel",
+        "marcel/praktikum5"
     ]
 }
