@@ -1,3 +1,5 @@
+import java.util.BitSet;
+
 import gdp.stdlib.StdIn;
 
 public class Oktadoku {
@@ -14,8 +16,8 @@ public class Oktadoku {
 
     public void read() {
         puzzle = new char[8][8];
-        for (int x = 0; x < puzzle.length; x++) {
-            for (int y = 0; y < puzzle[0].length; y++) {
+        for (int y = 0; y < puzzle[0].length; y++) {
+            for (int x = 0; x < puzzle.length; x++) {
                 char ch = StdIn.readChar();
                 puzzle[x][y] = ch != '0' && ch != '.' ? ch : ' ';
             }
@@ -48,8 +50,25 @@ public class Oktadoku {
         /* TODO */ }
 
     // -----------------------------------------
-    public boolean checkRows(){ return true; }
-    public boolean checkColumns(){ return true; }
-    public boolean checkBlocks(){ return true; }
+    public boolean checkRows() {
+        for (int row = 0; row < puzzle[0].length; row++) {
+            BitSet numberWasInRow = new BitSet(); // TODO hier einen besseren namen
+            for (int col = 0; col < puzzle.length; col++) {
+                int currentNumber = puzzle[col][row] != ' ' ? Integer.parseInt(puzzle[col][row] + "") : 0;
+                if (numberWasInRow.get(currentNumber) == true && currentNumber != 0)
+                    return false;
+                numberWasInRow.set(currentNumber, true);
+            }
+        }
+        return true;
+    }
+
+    public boolean checkColumns() {
+        return true;
+    }
+
+    public boolean checkBlocks() {
+        return true;
+    }
 
 }
