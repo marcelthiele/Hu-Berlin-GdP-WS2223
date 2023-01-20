@@ -47,20 +47,31 @@ public class Oktadoku {
     }
 
     public boolean check() {
-        boolean retCheck = checkRows() && checkColumns() && checkBlocks();
-        if(this.v == Variante.mitDiagonalen) retCheck = retCheck && checkDiagonals();
-        return retCheck;
+        return checkSpecificPuzzle(puzzle);
     }
 
     public void solve() {
-        /* TODO */ }
+            puzzle = solveRecursive(puzzle.clone());
+    }
 
+    
     // -----------------------------------------
-    public boolean checkRows() {
-        for (int row = 0; row < puzzle[0].length; row++) {
+    public char[][] solveRecursive(char[][] currentPuzzle){
+        // if(!check)
+        return puzzle;
+    }
+
+    public boolean checkSpecificPuzzle(char[][] currentPuzzle){
+        boolean retCheck = checkRows(currentPuzzle) && checkColumns(currentPuzzle) && checkBlocks(currentPuzzle);
+        if(this.v == Variante.mitDiagonalen) retCheck = retCheck && checkDiagonals(currentPuzzle);
+        return retCheck;
+    }
+
+    public boolean checkRows(char[][] currentPuzzle ) {
+        for (int row = 0; row < currentPuzzle[0].length; row++) {
             BitSet numberWasInRow = new BitSet(); // TODO hier einen besseren namen
-            for (int col = 0; col < puzzle.length; col++) {
-                int currentNumber = puzzle[col][row] != ' ' ? Integer.parseInt(puzzle[col][row] + "") : 0;
+            for (int col = 0; col < currentPuzzle.length; col++) {
+                int currentNumber = currentPuzzle[col][row] != ' ' ? Integer.parseInt(currentPuzzle[col][row] + "") : 0;
                 if (numberWasInRow.get(currentNumber) == true && currentNumber != 0)
                     return false;
                 numberWasInRow.set(currentNumber, true);
@@ -69,11 +80,11 @@ public class Oktadoku {
         return true;
     }
 
-    public boolean checkColumns() {
-        for (int col = 0; col < puzzle.length; col++) {
+    public boolean checkColumns(char[][] currentPuzzle ) {
+        for (int col = 0; col < currentPuzzle.length; col++) {
             BitSet numberWasInCol = new BitSet(); // TODO hier einen besseren namen
-            for (int row = 0; row < puzzle[0].length; row++) {
-                int currentNumber = puzzle[col][row] != ' ' ? Integer.parseInt(puzzle[col][row] + "") : 0;
+            for (int row = 0; row < currentPuzzle[0].length; row++) {
+                int currentNumber = currentPuzzle[col][row] != ' ' ? Integer.parseInt(currentPuzzle[col][row] + "") : 0;
                 if (numberWasInCol.get(currentNumber) == true && currentNumber != 0)
                     return false;
                 numberWasInCol.set(currentNumber, true);
@@ -82,24 +93,24 @@ public class Oktadoku {
         return true;
     }
 
-    public boolean checkBlocks() {
-        for (int rowBlockIndex = 0; rowBlockIndex < puzzle[0].length / NUMOFCELLSPERROWBLOCK; rowBlockIndex++) {
-            for (int colBlockIndex = 0; colBlockIndex < puzzle.length / NUMOFCELLSPERCOLBLOCK; colBlockIndex++) {
-                if (!checkBlock(rowBlockIndex, colBlockIndex))
+    public boolean checkBlocks(char[][] currentPuzzle ) {
+        for (int rowBlockIndex = 0; rowBlockIndex < currentPuzzle[0].length / NUMOFCELLSPERROWBLOCK; rowBlockIndex++) {
+            for (int colBlockIndex = 0; colBlockIndex < currentPuzzle.length / NUMOFCELLSPERCOLBLOCK; colBlockIndex++) {
+                if (!checkBlock(currentPuzzle, rowBlockIndex, colBlockIndex))
                     return false;
             }
         }
         return true;
     }
 
-    public boolean checkBlock(int rowBlockIndex, int colBlockIndex) {
+    public boolean checkBlock(char[][] currentPuzzle, int rowBlockIndex, int colBlockIndex) {
         BitSet numberWasInBlock = new BitSet(); // TODO hier einen besseren namen
         for (int rowInBlockIndex = 0; rowInBlockIndex < NUMOFCELLSPERROWBLOCK; rowInBlockIndex++) {
             for (int colInBlockIndex = 0; colInBlockIndex < NUMOFCELLSPERCOLBLOCK; colInBlockIndex++) {
                 int col = colBlockIndex * NUMOFCELLSPERCOLBLOCK + colInBlockIndex;
                 int row = rowBlockIndex * NUMOFCELLSPERROWBLOCK + rowInBlockIndex;
 
-                int currentNumber = puzzle[col][row] != ' ' ? Integer.parseInt(puzzle[col][row] + "") : 0;
+                int currentNumber = currentPuzzle[col][row] != ' ' ? Integer.parseInt(currentPuzzle[col][row] + "") : 0;
                 if (numberWasInBlock.get(currentNumber) == true && currentNumber != 0)
                     return false;
                 numberWasInBlock.set(currentNumber, true);
@@ -108,7 +119,7 @@ public class Oktadoku {
         return true;
     }
 
-    private boolean checkDiagonals() {
+    private boolean checkDiagonals(char[][] currentPuzzle ) {
         return false;
     }
 
