@@ -64,6 +64,15 @@ public class Oktadoku {
     }
 
     public boolean checkColumns() {
+        for (int col = 0; col < puzzle.length; col++) {
+            BitSet numberWasInCol = new BitSet(); // TODO hier einen besseren namen
+            for (int row = 0; row < puzzle[0].length; row++) {
+                int currentNumber = puzzle[col][row] != ' ' ? Integer.parseInt(puzzle[col][row] + "") : 0;
+                if (numberWasInCol.get(currentNumber) == true && currentNumber != 0)
+                    return false;
+                numberWasInCol.set(currentNumber, true);
+            }
+        }
         return true;
     }
 
