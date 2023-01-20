@@ -15,7 +15,8 @@ public class Oktadoku {
     char[][] puzzle;
 
     public Oktadoku(Variante var) {
-        /* TODO */ }
+        this.v = var;
+    }
 
     public void read() {
         puzzle = new char[8][8];
@@ -46,7 +47,9 @@ public class Oktadoku {
     }
 
     public boolean check() {
-        return checkRows() && checkColumns() && checkBlocks();
+        boolean retCheck = checkRows() && checkColumns() && checkBlocks();
+        if(this.v == Variante.mitDiagonalen) retCheck = retCheck && checkDiagonals();
+        return retCheck;
     }
 
     public void solve() {
@@ -103,6 +106,10 @@ public class Oktadoku {
             }
         }
         return true;
+    }
+
+    private boolean checkDiagonals() {
+        return false;
     }
 
 }
