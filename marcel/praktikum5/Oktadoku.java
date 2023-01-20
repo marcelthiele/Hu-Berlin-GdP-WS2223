@@ -34,6 +34,9 @@ public class Oktadoku {
     }
 
     private void writeSpecific(char[][] currentPuzzle) {
+        System.out.print("Oktadoku");
+        if(v == Variante.mitDiagonalen) System.out.print(" mit Diagonalen");
+        System.out.print("\n");
         for (int y = 0; y < currentPuzzle[0].length; y++) {
             if (y % NUMOFCELLSPERROWBLOCK == 0) {
                 System.out.println("+-----+-----+-----+-----+");
@@ -56,7 +59,10 @@ public class Oktadoku {
 
     public void solve() {
         puzzle = solveRecursive(puzzle.clone());
-        writeSpecific(puzzle);
+        if (puzzle == null)
+            System.out.println("Nicht loesbar :-(");
+        else
+            writeSpecific(puzzle);
     }
 
     // -----------------------------------------
@@ -68,7 +74,8 @@ public class Oktadoku {
         int[] emptyCell = getFirstEmptyCell(currentPuzzle);
         int emptyCellCol = emptyCell[0];
         int emptyCellRow = emptyCell[1];
-        if(emptyCellCol == -1 && emptyCellRow == -1) return currentPuzzle;
+        if (emptyCellCol == -1 && emptyCellRow == -1)
+            return currentPuzzle;
 
         // System.out.println("found empty cell");
         for (int currentNumberToCheck = 1; currentNumberToCheck < 9; currentNumberToCheck++) {
@@ -84,23 +91,23 @@ public class Oktadoku {
         return null;
     }
 
-    public int[] getFirstEmptyCell(char[][] currentPuzzle){
+    public int[] getFirstEmptyCell(char[][] currentPuzzle) {
         for (int row = 0; row < currentPuzzle[0].length; row++) {
             for (int col = 0; col < currentPuzzle.length; col++) {
                 if (currentPuzzle[col][row] == ' ') {
-                    return new int[]{col, row};
+                    return new int[] { col, row };
                 }
             }
         }
 
-        return new int[]{-1, -1};
+        return new int[] { -1, -1 };
     }
 
-    public char[][] copyArray(char[][] arrayToCopy){
+    public char[][] copyArray(char[][] arrayToCopy) {
         char[][] retArray = new char[arrayToCopy.length][arrayToCopy[0].length];
 
-        for(int i = 0; i < retArray.length; i++){
-            for(int j = 0; j < retArray[0].length; j++){
+        for (int i = 0; i < retArray.length; i++) {
+            for (int j = 0; j < retArray[0].length; j++) {
                 retArray[i][j] = arrayToCopy[i][j];
             }
         }
