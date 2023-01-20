@@ -41,12 +41,15 @@ public class Oktadoku {
     }
 
     public boolean check() {
-        return true;
+        return checkRows() && checkColumns() && checkBlocks();
     }
 
     public void solve() {
         /* TODO */ }
 
     // -----------------------------------------
+    public boolean checkRows(){ return true; }
+    public boolean checkColumns(){ return true; }
+    public boolean checkBlocks(){ return true; }
 
 }
