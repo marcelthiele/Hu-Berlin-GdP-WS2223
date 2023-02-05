@@ -1,4 +1,4 @@
-package marcel.praktikum4;
+package praktikum4;
 
 public class Riddle {
 
